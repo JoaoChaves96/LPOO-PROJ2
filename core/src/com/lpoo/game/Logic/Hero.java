@@ -33,15 +33,15 @@ public class Hero {
           if(position.y + 2 <= PlaneRacing.HEIGHT - hero.getHeight() - 30)
            position.add(0, 2);
        }
-       else if (Gdx.input.isKeyPressed(Input.Keys.S)){
+       if (Gdx.input.isKeyPressed(Input.Keys.S)){
            if (position.y >= 0)
             position.add(0, -2);
        }
-       else if (Gdx.input.isKeyPressed(Input.Keys.A)){
+       if (Gdx.input.isKeyPressed(Input.Keys.A)){
            if (position.x >= 0)
                position.add(-2, 0);
        }
-       else if (Gdx.input.isKeyPressed(Input.Keys.D)){
+       if (Gdx.input.isKeyPressed(Input.Keys.D)){
            if(position.x + 2 <= PlaneRacing.WIDTH - hero.getWidth() - 30)
                position.add(2, 0);
        }
@@ -61,6 +61,4 @@ public class Hero {
     public float getPositionY(){
         return position.y;
     }
-
-
 }

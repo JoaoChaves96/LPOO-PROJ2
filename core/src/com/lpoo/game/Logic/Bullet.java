@@ -32,7 +32,8 @@ public class Bullet {
         bulletAnimation.update(dt);
     }
 
-    public TextureRegion getTexture(){
+    public TextureRegion getTexture()
+    {
         return bulletAnimation.getFrame();
     }
 

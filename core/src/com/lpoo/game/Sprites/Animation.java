@@ -7,11 +7,11 @@ import com.badlogic.gdx.utils.Array;
  * Created by Joao on 13-05-2016.
  */
 public class Animation {
-    Array<TextureRegion> frames;
-    float maxFrameTime;
-    float currentFrameTime;
-    int frameCount;
-    int frame;
+    private Array<TextureRegion> frames;
+    private float maxFrameTime;
+    private float currentFrameTime;
+    private int frameCount;
+    private int frame;
 
 
     public Animation(TextureRegion region, int frameCount, float cycleTime){
@@ -43,7 +43,7 @@ public class Animation {
         }
         if (frame == 4){
             if (currentFrameTime > maxFrameTime) {
-                frame = 5;
+                frame = 4;
                 currentFrameTime = 0;
             }
         }
