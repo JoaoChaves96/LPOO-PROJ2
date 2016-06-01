@@ -21,6 +21,7 @@ import java.awt.event.KeyListener;
 public class Hero {
     private Vector2 position;
     private Texture hero;
+    private int health;
 
     public Hero(int x, int y){
         position = new Vector2(x, y);

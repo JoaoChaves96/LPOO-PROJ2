@@ -15,10 +15,10 @@ public class Explosion {
     private AnimationExpl explAnimation;
     private Rectangle bounds;
 
-    public Explosion(int x, int y){
+    public Explosion(int x, int y, int size){
         position = new Vector2(x, y);
         Texture texture = new Texture("explosionAnim.png");
-        explAnimation = new AnimationExpl(new TextureRegion(texture), 10, 0.5f);
+        explAnimation = new AnimationExpl(new TextureRegion(texture), 10, 0.5f, size);
         bounds = new Rectangle(position.x, position.y, explAnimation.getFrame().getRegionWidth(), explAnimation.getFrame().getRegionHeight());
     }
     public void handleInput(){}

@@ -15,7 +15,7 @@ public class AnimationExpl {
     int frame;
 
 
-    public AnimationExpl(TextureRegion region, int frameCount, float cycleTime){
+    public AnimationExpl(TextureRegion region, int frameCount, float cycleTime, int size){
         frames = new Array<TextureRegion>();
         TextureRegion temp;
         int frameWidth = region.getRegionWidth() / frameCount;

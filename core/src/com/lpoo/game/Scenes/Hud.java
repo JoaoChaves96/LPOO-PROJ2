@@ -60,4 +60,8 @@ public class Hud {
             timeCount = 0;
         }
     }
+
+    public void incScore(int num){
+        score+=num;
+    }
 }
