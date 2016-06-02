@@ -47,6 +47,26 @@ public class Hero {
        }
     }
 
+    public void moveUp(){
+        if(position.y + 3 <= PlaneRacing.HEIGHT - hero.getHeight() - 30)
+            position.add(0, 3);
+    }
+
+    public void moveDown(){
+        if (position.y >= 0)
+            position.add(0, -3);
+    }
+
+    public void moveLeft(){
+        if (position.x >= 0)
+            position.add(-3, 0);
+    }
+
+    public void moveRight(){
+        if(position.x + 3 <= PlaneRacing.WIDTH - hero.getWidth() - 30)
+            position.add(3, 0);
+    }
+
     public void update(float dt){
         handleInput();
     }

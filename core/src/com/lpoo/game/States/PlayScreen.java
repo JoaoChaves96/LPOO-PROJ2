@@ -2,12 +2,23 @@ package com.lpoo.game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.lpoo.game.Logic.Bullet;
 import com.lpoo.game.Logic.Enemy;
@@ -22,7 +33,7 @@ import java.io.Console;
 /**
  * Created by Joao on 13-05-2016.
  */
-public class PlayScreen extends State {
+public class PlayScreen extends State{
     private Hero hero;
     private Texture background;
     private Hud hud;
@@ -30,27 +41,93 @@ public class PlayScreen extends State {
     private Array<Bullet> enemy_bullets;
     private Array<Explosion> explosions;
     private Array<Enemy> enemies;
-    private Actor buttonUp;
-    Stage stage;
+
+    private Stage stage;
+    private TextButton buttonUp;
+    private TextButton buttonDown;
+    private TextButton buttonLeft;
+    private TextButton buttonRight;
+    BitmapFont font;
+    Skin skin;
+    TextureAtlas buttonAtlas;
 
     public PlayScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
         hero = new Hero(50, PlaneRacing.HEIGHT/2);
         background = new Texture("background.png");
-       // box = new Rectangle(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2, 100, 100);
         hero_bullets = new Array<Bullet>();
         enemy_bullets = new Array<Bullet>();
         hud = new Hud (game.batch);
-       // box.setPosition(PlaneRacing.WIDTH / 2 + 20, PlaneRacing.HEIGHT / 2);
         explosions = new Array<Explosion>();
         enemies = new Array<Enemy>();
+
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        font = new BitmapFont();
+        skin = new Skin();
+        buttonAtlas = new TextureAtlas("Buttons.pack");
+        skin.addRegions(buttonAtlas);
+        stage.clear();
+        TextButton.TextButtonStyle styleUp = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleDown = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleLeft = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleRight = new TextButton.TextButtonStyle();
+
+        styleUp.up = skin.getDrawable("arrowUp");
+        styleUp.down = skin.getDrawable("arrowUp");
+        styleUp.checked = skin.getDrawable("arrowUp");
+        styleUp.font = font;
+
+        styleDown.up = skin.getDrawable("arrowDown");
+        styleDown.down = skin.getDrawable("arrowDown");
+        styleDown.checked = skin.getDrawable("arrowDown");
+        styleDown.font = font;
+
+        styleLeft.up = skin.getDrawable("arrowLeft");
+        styleLeft.down = skin.getDrawable("arrowLeft");
+        styleLeft.checked = skin.getDrawable("arrowLeft");
+        styleLeft.font = font;
+
+        styleRight.up = skin.getDrawable("arrowRight");
+        styleRight.down = skin.getDrawable("arrowRight");
+        styleRight.checked = skin.getDrawable("arrowRight");
+        styleRight.font = font;
+
+        buttonUp = new TextButton("", styleUp);
+        buttonUp.setPosition(PlaneRacing.WIDTH / 2 , PlaneRacing.HEIGHT / 2);
+
+        buttonDown = new TextButton("", styleDown);
+        buttonDown.setPosition(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2 - 100);
+
+        buttonLeft = new TextButton("", styleLeft);
+        buttonLeft.setPosition(PlaneRacing.WIDTH / 2  - 100, PlaneRacing.HEIGHT / 2 - 50);
+
+        buttonRight = new TextButton("", styleRight);
+        buttonRight.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 2 - 50);
+
+        stage.addActor(buttonUp);
+        stage.addActor(buttonDown);
+        stage.addActor(buttonLeft);
+        stage.addActor(buttonRight);
     }
 
     @Override
     public void handleInput() {
         hero.handleInput();
+        if (buttonUp.isPressed())
+            hero.moveUp();
+
+        if (buttonDown.isPressed())
+            hero.moveDown();
+
+        if (buttonLeft.isPressed())
+            hero.moveLeft();
+
+        if (buttonRight.isPressed())
+            hero.moveRight();
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-           Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "E");
+           Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
@@ -58,7 +135,7 @@ public class PlayScreen extends State {
             enemies.add(enemy);
         }
         if (Gdx.input.justTouched()){
-            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "E");
+            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
         }
     }
@@ -120,10 +197,11 @@ public class PlayScreen extends State {
                 sb.draw(en.getTexture(), en.getPositionX(), en.getPositionY(),  en.getTexture().getWidth() * 2, en.getTexture().getHeight() * 2);
             }
         sb.draw(hero.getTexture(), hero.getPositionX(), hero.getPositionY(), hero.getTexture().getWidth() * 2, hero.getTexture().getHeight() * 2);
+        //System.out.println(hero.getPositionX());
         sb.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
-
+        stage.draw();
     }
 
     @Override
