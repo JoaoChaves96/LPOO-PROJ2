@@ -50,7 +50,7 @@ public class PlayScreen extends State {
     public void handleInput() {
         hero.handleInput();
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-           Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17);
+           Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "E");
             hero_bullets.add(bullet);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
@@ -58,7 +58,7 @@ public class PlayScreen extends State {
             enemies.add(enemy);
         }
         if (Gdx.input.justTouched()){
-            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17);
+            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "E");
             hero_bullets.add(bullet);
         }
     }

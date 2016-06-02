@@ -43,7 +43,7 @@ public class Hud {
         hpLabel = new Label(String.format("%03d", health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(heroLabel).expandX().padTop(10);
+        table.add(heroLabel);
         table.add(healthLabel).expandX().padTop(10);
         table.row();
         table.add(scoreLabel).expandX();
