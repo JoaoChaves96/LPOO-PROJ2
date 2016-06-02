@@ -47,6 +47,7 @@ public class PlayScreen extends State{
     private TextButton buttonDown;
     private TextButton buttonLeft;
     private TextButton buttonRight;
+    private TextButton buttonShot;
     BitmapFont font;
     Skin skin;
     TextureAtlas buttonAtlas;
@@ -72,6 +73,7 @@ public class PlayScreen extends State{
         TextButton.TextButtonStyle styleDown = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleLeft = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleRight = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleShot = new TextButton.TextButtonStyle();
 
         styleUp.up = skin.getDrawable("arrowUp");
         styleUp.down = skin.getDrawable("arrowUp");
@@ -93,22 +95,37 @@ public class PlayScreen extends State{
         styleRight.checked = skin.getDrawable("arrowRight");
         styleRight.font = font;
 
+        styleShot.up = skin.getDrawable("buttonA");
+        styleShot.down = skin.getDrawable("buttonA");
+        styleShot.checked = skin.getDrawable("buttonA");
+        styleShot.font = font;
+
         buttonUp = new TextButton("", styleUp);
-        buttonUp.setPosition(PlaneRacing.WIDTH / 2 , PlaneRacing.HEIGHT / 2);
+        buttonUp.setPosition(PlaneRacing.WIDTH / 8  - 50, PlaneRacing.HEIGHT / 4 - 20);
+        buttonUp.setBounds(buttonUp.getX(), buttonUp.getY(), 100, 100);
 
         buttonDown = new TextButton("", styleDown);
-        buttonDown.setPosition(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2 - 100);
+        buttonDown.setPosition(PlaneRacing.WIDTH / 8 - 50, PlaneRacing.HEIGHT / 4 - 120);
+        buttonDown.setBounds(buttonDown.getX(), buttonDown.getY(), 100, 100);
 
         buttonLeft = new TextButton("", styleLeft);
-        buttonLeft.setPosition(PlaneRacing.WIDTH / 2  - 100, PlaneRacing.HEIGHT / 2 - 50);
+        buttonLeft.setPosition(PlaneRacing.WIDTH / 8  - 120, PlaneRacing.HEIGHT / 4 - 70);
+        buttonLeft.setBounds(buttonLeft.getX(), buttonLeft.getY(), 100, 100);
 
         buttonRight = new TextButton("", styleRight);
-        buttonRight.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 2 - 50);
+        buttonRight.setPosition(PlaneRacing.WIDTH / 8   + 20, PlaneRacing.HEIGHT / 4 - 70);
+        buttonRight.setBounds(buttonRight.getX(), buttonRight.getY(), 100, 100);
+
+        buttonShot = new TextButton("", styleShot);
+        //buttonShot.setPosition(PlaneRacing.WIDTH - PlaneRacing.WIDTH / 8, PlaneRacing.HEIGHT / 4 - 20);
+        buttonShot.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 4 - 90);
+        buttonShot.setBounds(buttonShot.getX(), buttonShot.getY(), 150, 150);
 
         stage.addActor(buttonUp);
         stage.addActor(buttonDown);
         stage.addActor(buttonLeft);
         stage.addActor(buttonRight);
+        stage.addActor(buttonShot);
     }
 
     @Override
@@ -126,6 +143,55 @@ public class PlayScreen extends State{
         if (buttonRight.isPressed())
             hero.moveRight();
 
+       /* buttonShot.addListener(new InputListener() {
+            boolean touchdown;
+            @Override
+            public void touchUp(InputEvent event, float x, float y,
+                                int pointer, int button) {
+                boolean touchdown = true;
+               /* if (touchdown) {
+                    Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+                    hero_bullets.add(bullet);
+                    touchdown = true;
+                }
+                System.out.println("button released");
+                //it will work when finger is released..
+                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+                hero_bullets.add(bullet);
+
+            }
+
+            public boolean touchDown(InputEvent event, float x, float y,
+                                     int pointer, int button) {
+                touchdown=false;
+                System.out.println("button pressed");
+                //do your stuff it will work when u touched your actor
+                return true;
+            }
+
+        });*/
+        /*buttonShot.addListener(new ClickListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+                hero_bullets.add(bullet);
+            }
+        });*/
+
+        buttonShot.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+                hero_bullets.add(bullet);
+            }
+        });
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
@@ -134,10 +200,10 @@ public class PlayScreen extends State{
             Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
             enemies.add(enemy);
         }
-        if (Gdx.input.justTouched()){
+       /* if (Gdx.input.justTouched()){
             Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
-        }
+        }*/
     }
 
     @Override
@@ -145,6 +211,9 @@ public class PlayScreen extends State{
         handleInput();
         Array<Bullet> temp = new Array<Bullet>();
         for (Bullet bullet : hero_bullets) {
+            if (bullet.getPositionX() < PlaneRacing.WIDTH + 50)
+                temp.add(bullet);
+            else{
             if (enemies.size == 0)
                 temp.add(bullet);
             else {
@@ -165,6 +234,7 @@ public class PlayScreen extends State{
                         }
                     } else
                         temp.add(bullet);
+                }
                 }
             }
         }
