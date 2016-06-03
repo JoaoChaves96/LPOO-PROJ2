@@ -41,6 +41,8 @@ public class PlayScreen extends State{
     private Array<Bullet> enemy_bullets;
     private Array<Explosion> explosions;
     private Array<Enemy> enemies;
+    private int count;
+    private float timeCount;
 
     private Stage stage;
     private TextButton buttonUp;
@@ -48,9 +50,9 @@ public class PlayScreen extends State{
     private TextButton buttonLeft;
     private TextButton buttonRight;
     private TextButton buttonShot;
-    BitmapFont font;
-    Skin skin;
-    TextureAtlas buttonAtlas;
+    private BitmapFont font;
+    private Skin skin;
+    private TextureAtlas buttonAtlas;
 
     public PlayScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
@@ -61,6 +63,8 @@ public class PlayScreen extends State{
         hud = new Hud (game.batch);
         explosions = new Array<Explosion>();
         enemies = new Array<Enemy>();
+        count = 0;
+        timeCount = 0;
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -143,54 +147,23 @@ public class PlayScreen extends State{
         if (buttonRight.isPressed())
             hero.moveRight();
 
-       /* buttonShot.addListener(new InputListener() {
-            boolean touchdown;
-            @Override
-            public void touchUp(InputEvent event, float x, float y,
-                                int pointer, int button) {
-                boolean touchdown = true;
-               /* if (touchdown) {
-                    Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
-                    hero_bullets.add(bullet);
-                    touchdown = true;
-                }
-                System.out.println("button released");
-                //it will work when finger is released..
-                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
-                hero_bullets.add(bullet);
-
-            }
-
-            public boolean touchDown(InputEvent event, float x, float y,
-                                     int pointer, int button) {
-                touchdown=false;
-                System.out.println("button pressed");
-                //do your stuff it will work when u touched your actor
-                return true;
-            }
-
-        });*/
-        /*buttonShot.addListener(new ClickListener(){
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
-                return true;
-            }
-
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
-                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
-                hero_bullets.add(bullet);
-            }
-        });*/
-
         buttonShot.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
                 return true;
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
-                Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
-                hero_bullets.add(bullet);
+                /*Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+                hero_bullets.add(bullet);*/
+                count++;
             }
         });
+        if (count != 0) {
+            Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
+            hero_bullets.add(bullet);
+        }
+
+        count = 0;
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
@@ -200,20 +173,20 @@ public class PlayScreen extends State{
             Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
             enemies.add(enemy);
         }
-       /* if (Gdx.input.justTouched()){
-            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
-            hero_bullets.add(bullet);
-        }*/
     }
 
     @Override
     public void update(float dt) {
+        timeCount += dt;
+        if (timeCount > 5){
+            Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
+            enemies.add(enemy);
+            timeCount = 0;
+        }
+        System.out.println(dt);
         handleInput();
         Array<Bullet> temp = new Array<Bullet>();
         for (Bullet bullet : hero_bullets) {
-            if (bullet.getPositionX() < PlaneRacing.WIDTH + 50)
-                temp.add(bullet);
-            else{
             if (enemies.size == 0)
                 temp.add(bullet);
             else {
@@ -234,7 +207,6 @@ public class PlayScreen extends State{
                         }
                     } else
                         temp.add(bullet);
-                }
                 }
             }
         }
