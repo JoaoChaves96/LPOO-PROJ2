@@ -27,7 +27,9 @@ public class Enemy {
     public void handleInput(){}
 
     public void update(float dt){
-        handleInput();
+        position.add(-2, 0);
+        box.setPosition(position.x -2, position.y
+        );
     }
 
     public Texture getTexture(){
@@ -52,6 +54,9 @@ public class Enemy {
 
     public void dispose(){
         enemy.dispose();
+        box.setWidth(0);
+        box.setHeight(0);
+        box = null;
     }
 
     public int getHealth(){

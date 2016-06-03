@@ -30,20 +30,20 @@ public class Hero {
 
     public void handleInput(){
        if(Gdx.input.isKeyPressed(Input.Keys.W)){
-          if(position.y + 2 <= PlaneRacing.HEIGHT - hero.getHeight() - 30)
-           position.add(0, 2);
+          if(position.y + 5 <= PlaneRacing.HEIGHT - hero.getHeight() - 30)
+           position.add(0, 5);
        }
        if (Gdx.input.isKeyPressed(Input.Keys.S)){
            if (position.y >= 0)
-            position.add(0, -2);
+            position.add(0, -5);
        }
        if (Gdx.input.isKeyPressed(Input.Keys.A)){
            if (position.x >= 0)
-               position.add(-2, 0);
+               position.add(-5, 0);
        }
        if (Gdx.input.isKeyPressed(Input.Keys.D)){
-           if(position.x + 2 <= PlaneRacing.WIDTH - hero.getWidth() - 30)
-               position.add(2, 0);
+           if(position.x + 5 <= PlaneRacing.WIDTH - hero.getWidth() - 30)
+               position.add(5, 0);
        }
     }
 
