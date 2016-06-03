@@ -34,7 +34,7 @@ public class MenuScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, PlaneRacing.WIDTH, PlaneRacing.HEIGHT);
+        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(playBtn, (PlaneRacing.WIDTH / 10), (PlaneRacing.HEIGHT / 2)-(playBtn.getHeight()/2));
         sb.end();
     }

@@ -30,6 +30,7 @@ import com.lpoo.game.Sprites.AnimationExpl;
 
 import java.io.Console;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by Joao on 13-05-2016.
@@ -45,6 +46,7 @@ public class PlayScreen extends State{
     private int count;
     private float timeCount;
     int pos;
+    Random rand;
 
     private Stage stage;
     private TextButton buttonUp;
@@ -68,6 +70,8 @@ public class PlayScreen extends State{
         count = 0;
         timeCount = 0;
         pos = 0;
+        rand = new Random();
+        
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -182,8 +186,9 @@ public class PlayScreen extends State{
     @Override
     public void update(float dt) {
         timeCount += dt;
-        if (timeCount > 5){
-            Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2 + pos, PlaneRacing.HEIGHT / 2);
+        if (timeCount > 3){
+            int y_pos = rand.nextInt(PlaneRacing.HEIGHT);
+            Enemy enemy = new Enemy(PlaneRacing.WIDTH, y_pos);
             enemies.add(enemy);
             timeCount = 0;
             pos += 100;
@@ -230,18 +235,12 @@ public class PlayScreen extends State{
                 }
             }
         }
-       /* for (Bullet bullet : hero_bullets)
-            bullet.dispose();*/
-       // hero_bullets.clear();
-       // hero_bullets = temp;
-        //temp.clear();
         for (Bullet bullet : hero_bullets)
             bullet.update(dt);
         for (Explosion exp : explosions)
             exp.update(dt);
         for (Enemy en : enemies)
             en.update(dt);
-       // hero.update(dt);
         hud.update(dt);
 
         handleInput();
@@ -264,7 +263,6 @@ public class PlayScreen extends State{
                 sb.draw(bullet.getTexture(), bullet.getPositionX(), bullet.getPositionY());
             }
         sb.draw(hero.getTexture(), hero.getPositionX(), hero.getPositionY(), hero.getTexture().getWidth() * 2, hero.getTexture().getHeight() * 2);
-        //System.out.println(hero.getPositionX());
         sb.end();
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();
