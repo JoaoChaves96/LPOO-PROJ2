@@ -28,8 +28,7 @@ public class Enemy {
 
     public void update(float dt){
         position.add(-2, 0);
-        box.setPosition(position.x -2, position.y
-        );
+        box.setPosition(position.x + 23, position.y + 10);
     }
 
     public Texture getTexture(){

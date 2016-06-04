@@ -22,10 +22,11 @@ public class Bullet {
     public Bullet(int x, int y, String typ){
         position = new Vector2(x, y);
         String s;
-        if(typ == "H")
+        /*if(typ == "H")
             s = "bAnim.png";
         else
-            s = "enbAnim.png";
+            s = "enbAnim.png";*/
+        s = "bAnim.png";
 
         Texture texture = new Texture(s);
         bulletAnimation = new Animation(new TextureRegion(texture), 6, 0.5f);
@@ -45,7 +46,7 @@ public class Bullet {
 
     public TextureRegion getTexture()
     {
-        return bulletAnimation.getFrame();
+       return bulletAnimation.getFrame();
     }
 
     public float getPositionX(){
@@ -64,7 +65,9 @@ public class Bullet {
     }
 
     public void dispose(){
-
+        bounds.setWidth(0);
+        bounds.setHeight(0);
+        bounds = null;
         bulletAnimation.dispose();
     }
 }

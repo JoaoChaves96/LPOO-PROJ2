@@ -59,9 +59,16 @@ public class Hud {
             scoreLabel.setText(String.format("%06d", score));
             timeCount = 0;
         }
+        hpLabel.setText((String.format("%03d", health)));
     }
 
     public void incScore(int num){
         score+=num;
+    }
+
+    public void decHealth(int hp){ health -= hp; }
+
+    public int getHealth(){
+        return health;
     }
 }

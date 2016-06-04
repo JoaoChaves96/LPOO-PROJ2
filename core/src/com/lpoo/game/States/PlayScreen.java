@@ -40,11 +40,12 @@ public class PlayScreen extends State{
     private Texture background;
     private Hud hud;
     private ArrayList<Bullet> hero_bullets;
-    private Array<Bullet> enemy_bullets;
+    private ArrayList<Bullet> enemy_bullets;
     private Array<Explosion> explosions;
     private ArrayList<Enemy> enemies;
     private int count;
-    private float timeCount;
+    private float timeCount1;
+    private float timeCount2;
     int pos;
     Random rand;
 
@@ -63,15 +64,16 @@ public class PlayScreen extends State{
         hero = new Hero(50, PlaneRacing.HEIGHT/2);
         background = new Texture("background.png");
         hero_bullets = new ArrayList<Bullet>();
-        enemy_bullets = new Array<Bullet>();
+        enemy_bullets = new ArrayList<Bullet>();
         hud = new Hud (game.batch);
         explosions = new Array<Explosion>();
         enemies = new ArrayList<Enemy>();
         count = 0;
-        timeCount = 0;
+        timeCount1 = 0;
+        timeCount2 = 0;
         pos = 0;
         rand = new Random();
-        
+
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -185,15 +187,24 @@ public class PlayScreen extends State{
 
     @Override
     public void update(float dt) {
-        timeCount += dt;
-        if (timeCount > 3){
-            int y_pos = rand.nextInt(PlaneRacing.HEIGHT);
+        timeCount1 += dt;
+        timeCount2 += dt;
+        if (timeCount1 > 3){
+            int y_pos = rand.nextInt(PlaneRacing.HEIGHT - 60);
             Enemy enemy = new Enemy(PlaneRacing.WIDTH, y_pos);
             enemies.add(enemy);
-            timeCount = 0;
+            timeCount1 = 0;
             pos += 100;
         }
-        //ArrayList<Bullet> temp = new ArrayList<Bullet>();
+
+        if (timeCount2 > 2){
+            for (Enemy en : enemies) {
+                Bullet b = new Bullet((int) en.getPositionX() - 30, (int) en.getPositionY() + 17, "E");
+                enemy_bullets.add(b);
+            }
+            timeCount2 = 0;
+        }
+
         for (int j = 0; j < hero_bullets.size(); j++) {
             if (hero_bullets.get(j).getPositionX() > PlaneRacing.WIDTH + 50){
                 hero_bullets.get(j).dispose();
@@ -208,40 +219,68 @@ public class PlayScreen extends State{
                     for (int i = 0; i < enemies.size(); i++) {
                         if (hero_bullets.size() == 0)
                             break;
-                        if (hero_bullets.get(j).colides(enemies.get(i).getBox())) {
-                            Gdx.app.log("Bullet", "Colision");
-                            Explosion exp = new Explosion((int) hero_bullets.get(j).getPositionX(), (int) hero_bullets.get(j).getPositionY(), 1);
-                            explosions.add(exp);
-                            hero_bullets.get(j).dispose();
-                            hero_bullets.remove(j);
-                            enemies.get(i).getHit(20);
-                            if (enemies.get(i).getHealth() == 0) {
-                                hud.incScore(100);
-                                enemies.get(i).dispose();
-                                enemies.remove(i);
-                                if (i > 0 && enemies.size() > 1){}
+                        if(j < hero_bullets.size() && i < enemies.size()) {
+                            if (hero_bullets.get(j).colides(enemies.get(i).getBox())) {
+                                Gdx.app.log("Bullet", "Collision");
+                                Explosion exp = new Explosion((int) hero_bullets.get(j).getPositionX(), (int) hero_bullets.get(j).getPositionY(), 1);
+                                explosions.add(exp);
+                                hero_bullets.get(j).dispose();
+                                hero_bullets.remove(j);
+                                enemies.get(i).getHit(20);
+                                if (enemies.get(i).getHealth() == 0) {
+                                    hud.incScore(100);
+                                    enemies.get(i).dispose();
+                                    enemies.remove(i);
+                                    if (i > 0 && enemies.size() > 1) {
+                                    }
                                     //
-                                // i--;
-                                else
+                                    // i--;
+                                    else
+                                        break;
+                                    //hero_bullets.clear();
+                                    Explosion exp2 = new Explosion((int) enemies.get(i).getPositionX(), (int) enemies.get(i).getPositionY(), 3);
+                                    explosions.add(exp2);
                                     break;
-                                //hero_bullets.clear();
-                                Explosion exp2 = new Explosion((int) enemies.get(i).getPositionX(), (int) enemies.get(i).getPositionY(), 3);
-                                explosions.add(exp2);
-                                break;
+                                }
                             }
-                        } else{}
+                        }
                             //temp.add(hero_bullets.get(j));
                     }
                 }
             }
         }
+
+        for (int j = 0; j < enemy_bullets.size(); j++){
+            if (enemy_bullets.get(j).colides(hero.getBox())){
+                Gdx.app.log("Collision", "Hero");
+                Explosion exp = new Explosion((int) enemy_bullets.get(j).getPositionX(), (int) enemy_bullets.get(j).getPositionY(), 1);
+                explosions.add(exp);
+                enemy_bullets.get(j).dispose();
+                enemy_bullets.remove(j);
+                hero.getHit(10);
+                hud.decHealth(10);
+            }
+        }
+
         for (Bullet bullet : hero_bullets)
+            bullet.update(dt);
+        for (Bullet bullet : enemy_bullets)
             bullet.update(dt);
         for (Explosion exp : explosions)
             exp.update(dt);
-        for (Enemy en : enemies)
-            en.update(dt);
+        for (int i = 0; i < enemies.size(); i++){
+           if (enemies.get(i).getPositionX() < 0)
+               enemies.remove(i);
+        }
+        for(Enemy en : enemies)
+        en.update(dt);
+
         hud.update(dt);
+
+        if (hero.getHealth() <= 0){
+            gsm.set(new MenuScreen(gsm, game));
+            dispose();
+        }
 
         handleInput();
     }
@@ -250,9 +289,6 @@ public class PlayScreen extends State{
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background, 0, 0);
-            for (Bullet bullet : enemy_bullets){
-                sb.draw(bullet.getTexture(), bullet.getPositionX(), bullet.getPositionY());
-            }
             for (Explosion exp : explosions) {
                 sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY());
             }
@@ -261,6 +297,11 @@ public class PlayScreen extends State{
             }
             for (Bullet bullet : hero_bullets) {
                 sb.draw(bullet.getTexture(), bullet.getPositionX(), bullet.getPositionY());
+            }
+            for (Bullet bullet : enemy_bullets){
+                TextureRegion t = bullet.getTexture();
+                t.flip(true, false);
+                sb.draw(t, bullet.getPositionX(), bullet.getPositionY());
             }
         sb.draw(hero.getTexture(), hero.getPositionX(), hero.getPositionY(), hero.getTexture().getWidth() * 2, hero.getTexture().getHeight() * 2);
         sb.end();
@@ -271,6 +312,20 @@ public class PlayScreen extends State{
 
     @Override
     public void dispose() {
+        for (Enemy en : enemies)
+            en.dispose();
+        for (Bullet hb : hero_bullets)
+            hb.dispose();
+        for (Bullet hb : enemy_bullets)
+            hb.dispose();
+        for (Explosion exp : explosions)
+            exp.dispose();
 
+        hero.dispose();
+        background.dispose();
+        stage.dispose();
+        skin.dispose();
+        font.dispose();
+        buttonAtlas.dispose();
     }
 }
