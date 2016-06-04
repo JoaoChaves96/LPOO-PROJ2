@@ -2,26 +2,71 @@ package com.lpoo.game.States;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.lpoo.game.PlaneRacing;
 
 /**
  * Created by Joao on 13-05-2016.
  */
 public class MenuScreen extends State {
-    private Texture playBtn;
     private Texture background;
+    private Stage stage;
+    private TextButton playBtn;
+    private BitmapFont font;
+    private Skin skin;
+    private TextureAtlas buttonAtlas;
+
+    private int count;
 
     public MenuScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
-        playBtn = new Texture("playBtn.png");
         background = new Texture("menu_background.png");
+
+        stage = new Stage();
+        Gdx.input.setInputProcessor(stage);
+        font = new BitmapFont();
+        skin = new Skin();
+        buttonAtlas = new TextureAtlas("Buttons.pack");
+        skin.addRegions(buttonAtlas);
+        stage.clear();
+
+        count = 0;
+
+        TextButton.TextButtonStyle play = new TextButton.TextButtonStyle();
+
+        play.up = skin.getDrawable("playBtn");
+        play.down = skin.getDrawable("playBtn");
+        play.checked = skin.getDrawable("playBtn");
+        play.font = font;
+
+        playBtn = new TextButton("", play);
+        playBtn.setPosition(PlaneRacing.WIDTH / 10, PlaneRacing.HEIGHT / 2 + PlaneRacing.HEIGHT / 6);
+
+        stage.addActor(playBtn);
+
+        playBtn.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                count++;
+            }
+        });
     }
 
     @Override
     public void handleInput() {
-        if(Gdx.input.justTouched()){
+        if(count > 0){
             gsm.set(new PlayScreen(gsm, game));
+            count = 0;
             dispose();
         }
     }
@@ -35,13 +80,12 @@ public class MenuScreen extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sb.draw(playBtn, (PlaneRacing.WIDTH / 10), (PlaneRacing.HEIGHT / 2)-(playBtn.getHeight()/2));
         sb.end();
+        stage.draw();
     }
 
     @Override
     public void dispose() {
         background.dispose();
-        playBtn.dispose();
     }
 }

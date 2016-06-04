@@ -3,37 +3,44 @@ Buttons.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+playBtn
+  rotate: false
+  xy: 1, 105
+  size: 350, 150
+  orig: 350, 150
+  offset: 0, 0
+  index: -1
 arrowDown
   rotate: false
-  xy: 1, 1
+  xy: 1, 53
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 53, 1
+  xy: 1, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 105, 1
+  xy: 353, 205
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 157, 1
+  xy: 53, 53
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 209, 1
+  xy: 53, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0

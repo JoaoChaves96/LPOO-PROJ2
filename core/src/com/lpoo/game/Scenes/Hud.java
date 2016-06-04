@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.lpoo.game.Logic.Hero;
 import com.lpoo.game.PlaneRacing;
 
 /**
@@ -20,19 +21,19 @@ public class Hud {
 
     private float timeCount;
     private int score;
-    private int health;
+    private Hero hero;
 
     Label scoreLabel;
     Label heroLabel;
     Label healthLabel;
     Label hpLabel;
 
-    public Hud(SpriteBatch sb){
+    public Hud(SpriteBatch sb, Hero h){
         timeCount = 0;
         score = 0;
-        health = 100;
         viewport = new FitViewport(PlaneRacing.WIDTH, PlaneRacing.HEIGHT, new OrthographicCamera());
         stage = new Stage(viewport, sb);
+        hero = h;
 
         Table table = new Table();
         table.top();
@@ -40,7 +41,7 @@ public class Hud {
 
         scoreLabel = new Label(String.format("%06d", score), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         heroLabel = new Label ("SCORE", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        hpLabel = new Label(String.format("%03d", health), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        hpLabel = new Label(String.format("%03d", hero.getHealth()), new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         healthLabel = new Label("HEALTH", new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(heroLabel);
@@ -59,16 +60,10 @@ public class Hud {
             scoreLabel.setText(String.format("%06d", score));
             timeCount = 0;
         }
-        hpLabel.setText((String.format("%03d", health)));
+        hpLabel.setText((String.format("%03d", hero.getHealth())));
     }
 
     public void incScore(int num){
         score+=num;
-    }
-
-    public void decHealth(int hp){ health -= hp; }
-
-    public int getHealth(){
-        return health;
     }
 }

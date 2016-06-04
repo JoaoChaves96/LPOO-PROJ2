@@ -70,7 +70,7 @@ public class PlayScreen extends State{
         background = new Texture("background.png");
         hero_bullets = new ArrayList<Bullet>();
         enemy_bullets = new ArrayList<Bullet>();
-        hud = new Hud (game.batch);
+        hud = new Hud (game.batch, hero);
         explosions = new Array<Explosion>();
         enemies = new ArrayList<Enemy>();
         count = 0;
@@ -142,7 +142,6 @@ public class PlayScreen extends State{
         buttonRight.setBounds(buttonRight.getX(), buttonRight.getY(), 100, 100);
 
         buttonShot = new TextButton("", styleShot);
-        //buttonShot.setPosition(PlaneRacing.WIDTH - PlaneRacing.WIDTH / 8, PlaneRacing.HEIGHT / 4 - 20);
         buttonShot.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 4 - 90);
         buttonShot.setBounds(buttonShot.getX(), buttonShot.getY(), 150, 150);
 
@@ -158,8 +157,6 @@ public class PlayScreen extends State{
             }
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
-                /*Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
-                hero_bullets.add(bullet);*/
                 count++;
             }
         });
@@ -267,7 +264,7 @@ public class PlayScreen extends State{
                 enemy_bullets.get(j).dispose();
                 enemy_bullets.remove(j);
                 hero.getHit(10);
-                hud.decHealth(10);
+
             }
         }
 
@@ -278,8 +275,10 @@ public class PlayScreen extends State{
         for (Explosion exp : explosions)
             exp.update(dt);
         for (int i = 0; i < enemies.size(); i++){
-           if (enemies.get(i).getPositionX() < 0)
+           if (enemies.get(i).getPositionX() < 0) {
+               hero.getHit(10);
                enemies.remove(i);
+           }
         }
         for(Enemy en : enemies)
         en.update(dt);
