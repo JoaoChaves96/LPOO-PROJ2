@@ -3,6 +3,8 @@ package com.lpoo.game.States;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -48,6 +50,9 @@ public class PlayScreen extends State{
     private float timeCount2;
     int pos;
     Random rand;
+    private Sound shot;
+    private Sound explosion;
+    private Music song;
 
     private Stage stage;
     private TextButton buttonUp;
@@ -73,6 +78,13 @@ public class PlayScreen extends State{
         timeCount2 = 0;
         pos = 0;
         rand = new Random();
+        song = Gdx.audio.newMusic((Gdx.files.internal("unity.mp3")));
+        shot = Gdx.audio.newSound(Gdx.files.internal("laser.ogg"));
+        explosion = Gdx.audio.newSound((Gdx.files.internal("explosion.ogg")));
+
+        song.setLooping(true);
+        song.setVolume(0.05f);
+        song.play();
 
 
         stage = new Stage();
@@ -171,6 +183,7 @@ public class PlayScreen extends State{
         if (count != 0) {
             Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
             hero_bullets.add(bullet);
+            shot.play(0.05f);
         }
 
         count = 0;
@@ -178,6 +191,7 @@ public class PlayScreen extends State{
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
+            shot.play(0.05f);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
             Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
@@ -187,6 +201,7 @@ public class PlayScreen extends State{
 
     @Override
     public void update(float dt) {
+        handleInput();
         timeCount1 += dt;
         timeCount2 += dt;
         if (timeCount1 > 3){
@@ -210,11 +225,9 @@ public class PlayScreen extends State{
                 hero_bullets.get(j).dispose();
                 hero_bullets.remove(j);
                 if (hero_bullets.size() > 1 && j > 0){}
-                  //  j--;
             }
             else{
                 if (enemies.size() == 0){}
-                    //temp.add(hero_bullets.get(j));
                 else {
                     for (int i = 0; i < enemies.size(); i++) {
                         if (hero_bullets.size() == 0)
@@ -228,23 +241,19 @@ public class PlayScreen extends State{
                                 hero_bullets.remove(j);
                                 enemies.get(i).getHit(20);
                                 if (enemies.get(i).getHealth() == 0) {
+                                    explosion.play(0.1f);
                                     hud.incScore(100);
                                     enemies.get(i).dispose();
                                     enemies.remove(i);
-                                    if (i > 0 && enemies.size() > 1) {
-                                    }
-                                    //
-                                    // i--;
+                                    if (i > 0 && enemies.size() > 1) {}
                                     else
                                         break;
-                                    //hero_bullets.clear();
                                     Explosion exp2 = new Explosion((int) enemies.get(i).getPositionX(), (int) enemies.get(i).getPositionY(), 3);
                                     explosions.add(exp2);
                                     break;
                                 }
                             }
                         }
-                            //temp.add(hero_bullets.get(j));
                     }
                 }
             }
@@ -277,12 +286,10 @@ public class PlayScreen extends State{
 
         hud.update(dt);
 
-        if (hero.getHealth() <= 0){
+        if (hero.getHealth() <= 0) {
             gsm.set(new MenuScreen(gsm, game));
             dispose();
         }
-
-        handleInput();
     }
 
     @Override
@@ -327,5 +334,7 @@ public class PlayScreen extends State{
         skin.dispose();
         font.dispose();
         buttonAtlas.dispose();
+        shot.dispose();
+        song.dispose();
     }
 }
