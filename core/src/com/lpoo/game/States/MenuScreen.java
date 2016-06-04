@@ -1,6 +1,7 @@
 package com.lpoo.game.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lpoo.game.PlaneRacing;
 
 /**
@@ -22,6 +25,8 @@ public class MenuScreen extends State {
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
+    private OrthographicCamera cam;
+    private Viewport port;
 
     private int count;
 
@@ -36,6 +41,10 @@ public class MenuScreen extends State {
         buttonAtlas = new TextureAtlas("Buttons.pack");
         skin.addRegions(buttonAtlas);
         stage.clear();
+
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
         count = 0;
 
@@ -79,7 +88,7 @@ public class MenuScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(background, 0, 0);//, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.end();
         stage.draw();
     }
@@ -87,5 +96,9 @@ public class MenuScreen extends State {
     @Override
     public void dispose() {
         background.dispose();
+        stage.dispose();
+        font.dispose();
+        skin.dispose();
+        buttonAtlas.dispose();
     }
 }

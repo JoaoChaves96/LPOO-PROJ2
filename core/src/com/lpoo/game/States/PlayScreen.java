@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lpoo.game.Logic.Bullet;
 import com.lpoo.game.Logic.Enemy;
 import com.lpoo.game.Logic.Explosion;
@@ -52,7 +55,11 @@ public class PlayScreen extends State{
     Random rand;
     private Sound shot;
     private Sound explosion;
+    private Sound getHit;
     private Music song;
+
+    private OrthographicCamera cam;
+    private Viewport port;
 
     private Stage stage;
     private TextButton buttonUp;
@@ -80,12 +87,16 @@ public class PlayScreen extends State{
         rand = new Random();
         song = Gdx.audio.newMusic((Gdx.files.internal("unity.mp3")));
         shot = Gdx.audio.newSound(Gdx.files.internal("laser.ogg"));
+        getHit = Gdx.audio.newSound(Gdx.files.internal("getHit.ogg"));
         explosion = Gdx.audio.newSound((Gdx.files.internal("explosion.ogg")));
 
         song.setLooping(true);
         song.setVolume(0.05f);
         song.play();
 
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
@@ -259,6 +270,7 @@ public class PlayScreen extends State{
         for (int j = 0; j < enemy_bullets.size(); j++){
             if (enemy_bullets.get(j).colides(hero.getBox())){
                 Gdx.app.log("Collision", "Hero");
+                getHit.play(0.1f);
                 Explosion exp = new Explosion((int) enemy_bullets.get(j).getPositionX(), (int) enemy_bullets.get(j).getPositionY(), 1);
                 explosions.add(exp);
                 enemy_bullets.get(j).dispose();
