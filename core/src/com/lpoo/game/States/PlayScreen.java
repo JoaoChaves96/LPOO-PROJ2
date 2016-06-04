@@ -298,7 +298,7 @@ public class PlayScreen extends State{
         hud.update(dt);
 
         if (hero.getHealth() <= 0) {
-            gsm.set(new MenuScreen(gsm, game));
+            gsm.set(new GameOverScreen(gsm, game));
             dispose();
         }
     }
@@ -306,7 +306,7 @@ public class PlayScreen extends State{
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0);
+        sb.draw(background, 0, 0, PlaneRacing.WIDTH, PlaneRacing.HEIGHT);
             for (Explosion exp : explosions) {
                 sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY());
             }

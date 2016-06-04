@@ -22,10 +22,7 @@ public class Bullet {
     public Bullet(int x, int y, String typ){
         position = new Vector2(x, y);
         String s;
-        /*if(typ == "H")
-            s = "bAnim.png";
-        else
-            s = "enbAnim.png";*/
+
         s = "bAnim.png";
 
         Texture texture = new Texture(s);

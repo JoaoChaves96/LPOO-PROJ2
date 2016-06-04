@@ -17,7 +17,7 @@ public class Explosion {
 
     public Explosion(int x, int y, int size){
         position = new Vector2(x, y);
-        Texture texture = new Texture("explosionAnim.png");
+        Texture texture = new Texture("explosionAnim2.png");
         explAnimation = new AnimationExpl(new TextureRegion(texture), 10, 0.5f, size);
         bounds = new Rectangle(position.x, position.y, explAnimation.getFrame().getRegionWidth(), explAnimation.getFrame().getRegionHeight());
     }
