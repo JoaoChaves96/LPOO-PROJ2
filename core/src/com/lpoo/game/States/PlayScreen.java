@@ -317,9 +317,7 @@ public class PlayScreen extends State{
                 sb.draw(bullet.getTexture(), bullet.getPositionX(), bullet.getPositionY());
             }
             for (Bullet bullet : enemy_bullets){
-                TextureRegion t = bullet.getTexture();
-                t.flip(true, false);
-                sb.draw(t, bullet.getPositionX(), bullet.getPositionY());
+                sb.draw(bullet.getTexture(), bullet.getPositionX(), bullet.getPositionY());
             }
         sb.draw(hero.getTexture(), hero.getPositionX(), hero.getPositionY(), hero.getTexture().getWidth() * 2, hero.getTexture().getHeight() * 2);
         sb.end();
