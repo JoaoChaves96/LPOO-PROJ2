@@ -33,19 +33,21 @@ public class MenuScreen extends State {
 
     public MenuScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
+
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
         background = new Texture("menu_background.png");
 
-        stage = new Stage();
+        stage = new Stage(port, game.batch);
+
         Gdx.input.setInputProcessor(stage);
+
         font = new BitmapFont();
         skin = new Skin();
         buttonAtlas = new TextureAtlas("Buttons.pack");
         skin.addRegions(buttonAtlas);
         stage.clear();
-
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false);
-        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
         count = 0;
 
@@ -103,7 +105,7 @@ public class MenuScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, PlaneRacing.WIDTH, PlaneRacing.HEIGHT);//, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.end();
         stage.draw();
     }

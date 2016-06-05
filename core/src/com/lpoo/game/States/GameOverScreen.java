@@ -22,21 +22,26 @@ public class GameOverScreen extends State {
     private Texture background;
     private BitmapFont font;
 
-    private Integer scoreInt;
+    private OrthographicCamera cam;
+    private Viewport port;
+
+    private int scoreInt;
     String text;
-    String score;
 
 
     public GameOverScreen(ScreenManager gsm, PlaneRacing game, int scor) {
         super(gsm, game);
+
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(PlaneRacing.WIDTH, PlaneRacing.HEIGHT, cam);
+
         background = new Texture("gameover.png");
         font = new BitmapFont();
-        text = "YOUR SCORE WAS:";
+        scoreInt = scor;
+        text = "YOUR SCORE WAS: " + scoreInt;
         font.setColor(Color.RED);
         font.getData().setScale(2, 2);
-        scoreInt = scor;
-        score = scoreInt.toString();
-
     }
 
     @Override
@@ -55,9 +60,8 @@ public class GameOverScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, PlaneRacing.WIDTH, PlaneRacing.HEIGHT);
-        font.draw(sb, text, PlaneRacing.WIDTH/4 + 110, PlaneRacing.HEIGHT / 2 - PlaneRacing.HEIGHT/4 + 30);
-        font.draw(sb, score, PlaneRacing.WIDTH/2 + 140, PlaneRacing.HEIGHT / 2 - PlaneRacing.HEIGHT/4 + 30);
+        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        font.draw(sb, text, Gdx.graphics.getWidth()/2 - 150, Gdx.graphics.getHeight() / 2 - Gdx.graphics.getHeight()/4 + 50);
         sb.end();
     }
 

@@ -106,13 +106,17 @@ public class PlayScreen extends State{
         cam.setToOrtho(false);
         port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
-        stage = new Stage();
+        stage = new Stage(port, game.batch);
+
         Gdx.input.setInputProcessor(stage);
+
         font = new BitmapFont();
         skin = new Skin();
         buttonAtlas = new TextureAtlas("Buttons.pack");
         skin.addRegions(buttonAtlas);
+
         stage.clear();
+
         TextButton.TextButtonStyle styleUp = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleDown = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleLeft = new TextButton.TextButtonStyle();
@@ -234,8 +238,8 @@ public class PlayScreen extends State{
         timeCount1 += dt;
         timeCount2 += dt;
         if (timeCount1 > enemy_spawner){
-                int y_pos = rand.nextInt(PlaneRacing.HEIGHT - 60);
-                Enemy enemy = new Enemy(PlaneRacing.WIDTH, y_pos);
+                int y_pos = rand.nextInt(Gdx.graphics.getHeight() - 60);
+                Enemy enemy = new Enemy(Gdx.graphics.getWidth(), y_pos);
                 enemies.add(enemy);
                 timeCount1 = 0;
         }
@@ -326,7 +330,7 @@ public class PlayScreen extends State{
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(background, 0, 0, PlaneRacing.WIDTH, PlaneRacing.HEIGHT);
+        sb.draw(background, 0, 0,  Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             for (Explosion exp : explosions) {
                 sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY());
             }

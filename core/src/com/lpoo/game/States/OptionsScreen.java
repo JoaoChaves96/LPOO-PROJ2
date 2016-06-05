@@ -1,12 +1,15 @@
 package com.lpoo.game.States;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lpoo.game.PlaneRacing;
 
 /**
@@ -19,20 +22,30 @@ public class OptionsScreen extends State {
     private TextButton l2;
     private TextButton l3;
     private TextButton exit;
+
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
+
     private Stage stage;
+
     private TextButton.TextButtonStyle styleSound;
     private TextButton.TextButtonStyle style1;
     private TextButton.TextButtonStyle style2;
     private TextButton.TextButtonStyle style3;
     private TextButton.TextButtonStyle styleexit;
 
+    private OrthographicCamera cam;
+    private Viewport port;
+
     public OptionsScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
 
-        stage = new Stage();
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(PlaneRacing.WIDTH, PlaneRacing.HEIGHT, cam);
+
+        stage = new Stage(port, game.batch);
 
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
@@ -160,8 +173,9 @@ public class OptionsScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        stage.draw();
         sb.end();
+
+        stage.draw();
     }
 
     @Override
