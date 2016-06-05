@@ -45,51 +45,58 @@ musicOn
   orig: 100, 100
   offset: 0, 0
   index: -1
-siganl1
+pause
   rotate: false
   xy: 557, 155
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-siganl1_c
+siganl1
   rotate: false
   xy: 659, 155
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal2
+siganl1_c
   rotate: false
   xy: 761, 155
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal2_c
+signal2
   rotate: false
   xy: 863, 155
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal3
+signal2_c
   rotate: false
   xy: 353, 53
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal3_c
+signal3
   rotate: false
   xy: 455, 53
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-wrench
+signal3_c
   rotate: false
   xy: 557, 53
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+wrench
+  rotate: false
+  xy: 659, 53
   size: 100, 100
   orig: 100, 100
   offset: 0, 0

@@ -60,13 +60,13 @@ public class PlayScreen extends State{
     private OrthographicCamera cam;
     private Viewport port;
 
-    private Stage stage;
+    public Stage stage;
     private TextButton buttonUp;
     private TextButton buttonDown;
     private TextButton buttonLeft;
     private TextButton buttonRight;
     private TextButton buttonShot;
-    private TextButton buttonOptions;
+    private TextButton buttonPause;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
@@ -118,6 +118,7 @@ public class PlayScreen extends State{
         TextButton.TextButtonStyle styleLeft = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleRight = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleShot = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle stylePause = new TextButton.TextButtonStyle();
 
         styleUp.up = skin.getDrawable("arrowUp");
         styleUp.down = skin.getDrawable("arrowUp");
@@ -144,6 +145,10 @@ public class PlayScreen extends State{
         styleShot.checked = skin.getDrawable("buttonA");
         styleShot.font = font;
 
+        stylePause.up = skin.getDrawable("pause");
+        stylePause.down = skin.getDrawable("pause");
+        stylePause.font = font;
+
         buttonUp = new TextButton("", styleUp);
         buttonUp.setPosition(PlaneRacing.WIDTH / 8  - 50, PlaneRacing.HEIGHT / 4 - 20);
         buttonUp.setBounds(buttonUp.getX(), buttonUp.getY(), 100, 100);
@@ -164,11 +169,16 @@ public class PlayScreen extends State{
         buttonShot.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 4 - 90);
         buttonShot.setBounds(buttonShot.getX(), buttonShot.getY(), 150, 150);
 
+        buttonPause = new TextButton("", stylePause);
+        buttonPause.setPosition(PlaneRacing.WIDTH / 2 + 270, PlaneRacing.HEIGHT - 10);
+        buttonPause.setBounds(buttonPause.getX(), buttonPause.getY(), 50, 50);
+
         stage.addActor(buttonUp);
         stage.addActor(buttonDown);
         stage.addActor(buttonLeft);
         stage.addActor(buttonRight);
         stage.addActor(buttonShot);
+        stage.addActor(buttonPause);
 
         buttonShot.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -195,6 +205,9 @@ public class PlayScreen extends State{
 
         if (buttonRight.isPressed())
             hero.moveRight();
+
+        if (buttonPause.isPressed())
+            gsm.set(new PauseScreen(gsm, game, this));
 
         if (count != 0) {
             Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
