@@ -31,6 +31,8 @@ public class MenuScreen extends State {
     private Viewport port;
 
     private int count;
+    private int count2;
+    private int count3;
 
     public MenuScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
@@ -51,6 +53,8 @@ public class MenuScreen extends State {
         stage.clear();
 
         count = 0;
+        count2 = 0;
+        count3 = 0;
 
         TextButton.TextButtonStyle play = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleOptions = new TextButton.TextButtonStyle();
@@ -91,6 +95,16 @@ public class MenuScreen extends State {
                 count++;
             }
         });
+
+        options.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                count2++;
+            }
+        });
     }
 
     @Override
@@ -101,9 +115,10 @@ public class MenuScreen extends State {
             count = 0;
         }
 
-        if (options.isPressed()){
+        if (count2 > 0){
             dispose();
-            gsm.set(new OptionsScreen(gsm, game));
+            count2 = 0;
+            gsm.push(new OptionsScreen(gsm, game));
         }
     }
 
