@@ -57,16 +57,16 @@ public class MenuScreen extends State {
         TextButton.TextButtonStyle styleScore = new TextButton.TextButtonStyle();
 
         play.up = skin.getDrawable("playBtn");
-        play.down = skin.getDrawable("playBtn");
+        play.down = skin.getDrawable("playBtnDown");
         play.checked = skin.getDrawable("playBtn");
         play.font = font;
 
         styleOptions.up = skin.getDrawable("options");
-        styleOptions.down = skin.getDrawable("options");
+        styleOptions.down = skin.getDrawable("optionsDown");
         styleOptions.font = font;
 
         styleScore.up = skin.getDrawable("highscores");
-        styleScore.down = skin.getDrawable("highscores");
+        styleScore.down = skin.getDrawable("highscoresDown");
         styleScore.font = font;
 
         playBtn = new TextButton("", play);
