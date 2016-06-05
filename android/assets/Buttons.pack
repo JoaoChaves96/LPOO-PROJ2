@@ -5,70 +5,126 @@ filter: Nearest,Nearest
 repeat: none
 playBtn
   rotate: false
-  xy: 1, 103
+  xy: 1, 105
   size: 350, 150
   orig: 350, 150
   offset: 0, 0
   index: -1
 audioOff
   rotate: false
-  xy: 1, 1
+  xy: 1, 3
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 audioOn
   rotate: false
-  xy: 353, 153
+  xy: 353, 155
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+exit
+  rotate: false
+  xy: 103, 3
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 musicOff
   rotate: false
-  xy: 103, 1
+  xy: 455, 155
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 musicOn
   rotate: false
-  xy: 205, 1
+  xy: 205, 3
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+siganl1
+  rotate: false
+  xy: 557, 155
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+siganl1_c
+  rotate: false
+  xy: 659, 155
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+signal2
+  rotate: false
+  xy: 761, 155
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+signal2_c
+  rotate: false
+  xy: 863, 155
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+signal3
+  rotate: false
+  xy: 353, 53
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+signal3_c
+  rotate: false
+  xy: 455, 53
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+wrench
+  rotate: false
+  xy: 557, 53
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 arrowDown
   rotate: false
-  xy: 455, 203
+  xy: 307, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 353, 101
+  xy: 359, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 455, 151
+  xy: 411, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 307, 49
+  xy: 463, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 359, 49
+  xy: 515, 1
   size: 50, 50
   orig: 50, 50
   offset: 0, 0

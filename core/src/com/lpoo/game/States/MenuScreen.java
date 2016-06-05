@@ -22,6 +22,7 @@ public class MenuScreen extends State {
     private Texture background;
     private Stage stage;
     private TextButton playBtn;
+    private TextButton options;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
@@ -49,16 +50,25 @@ public class MenuScreen extends State {
         count = 0;
 
         TextButton.TextButtonStyle play = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleOptions = new TextButton.TextButtonStyle();
 
         play.up = skin.getDrawable("playBtn");
         play.down = skin.getDrawable("playBtn");
         play.checked = skin.getDrawable("playBtn");
         play.font = font;
 
+        styleOptions.up = skin.getDrawable("wrench");
+        styleOptions.down = skin.getDrawable("wrench");
+        styleOptions.font = font;
+
         playBtn = new TextButton("", play);
         playBtn.setPosition(PlaneRacing.WIDTH / 10, PlaneRacing.HEIGHT / 2 + PlaneRacing.HEIGHT / 6);
 
+        options = new TextButton("", styleOptions);
+        options.setPosition(PlaneRacing.WIDTH / 4 - 200, 50);
+
         stage.addActor(playBtn);
+        stage.addActor(options);
 
         playBtn.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -74,9 +84,14 @@ public class MenuScreen extends State {
     @Override
     public void handleInput() {
         if(count > 0){
-            gsm.set(new PlayScreen(gsm, game));
-            count = 0;
             dispose();
+            gsm.push(new PlayScreen(gsm, game));
+            count = 0;
+        }
+
+        if (options.isPressed()){
+            dispose();
+            gsm.set(new OptionsScreen(gsm, game));
         }
     }
 

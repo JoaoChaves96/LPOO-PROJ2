@@ -3,11 +3,13 @@ package com.lpoo.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lpoo.game.States.GameOverScreen;
 import com.lpoo.game.States.MenuScreen;
+import com.lpoo.game.States.OptionsScreen;
 import com.lpoo.game.States.ScreenManager;
 
 public class PlaneRacing extends Game {
@@ -18,11 +20,25 @@ public class PlaneRacing extends Game {
 
 	private ScreenManager gsm;
 	public SpriteBatch batch;
+	public Music song;
+	public boolean on;
+	public int dif;
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		gsm = new ScreenManager();
+
+		on = true;
+		dif = 1;
+
+		song = Gdx.audio.newMusic((Gdx.files.internal("unity.mp3")));
+
+		song.setLooping(true);
+		song.setVolume(0.1f);
+		song.play();
+
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		gsm.push(new MenuScreen(gsm, this));
 	}

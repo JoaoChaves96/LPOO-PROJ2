@@ -51,12 +51,11 @@ public class PlayScreen extends State{
     private int count;
     private float timeCount1;
     private float timeCount2;
-    int pos;
+    private int enemy_spawner;
     Random rand;
     private Sound shot;
     private Sound explosion;
     private Sound getHit;
-    private Music song;
 
     private OrthographicCamera cam;
     private Viewport port;
@@ -67,6 +66,7 @@ public class PlayScreen extends State{
     private TextButton buttonLeft;
     private TextButton buttonRight;
     private TextButton buttonShot;
+    private TextButton buttonOptions;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
@@ -83,16 +83,24 @@ public class PlayScreen extends State{
         count = 0;
         timeCount1 = 0;
         timeCount2 = 0;
-        pos = 0;
+
+        switch(game.dif){
+            case  1:
+                enemy_spawner = 3;
+                break;
+            case 2:
+                enemy_spawner = 2;
+                break;
+            case 3:
+                enemy_spawner = 1;
+                break;
+        }
+
         rand = new Random();
-        song = Gdx.audio.newMusic((Gdx.files.internal("unity.mp3")));
+
         shot = Gdx.audio.newSound(Gdx.files.internal("laser.ogg"));
         getHit = Gdx.audio.newSound(Gdx.files.internal("getHit.ogg"));
         explosion = Gdx.audio.newSound((Gdx.files.internal("explosion.ogg")));
-
-        song.setLooping(true);
-        song.setVolume(0.05f);
-        song.play();
 
         cam = new OrthographicCamera();
         cam.setToOrtho(false);
@@ -191,7 +199,7 @@ public class PlayScreen extends State{
         if (count != 0) {
             Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");
             hero_bullets.add(bullet);
-            shot.play(0.05f);
+            if (game.on) shot.play(0.05f);
         }
 
         count = 0;
@@ -199,7 +207,7 @@ public class PlayScreen extends State{
         if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
-            shot.play(0.05f);
+           if (game.on) shot.play(0.05f);
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
             Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
@@ -212,12 +220,11 @@ public class PlayScreen extends State{
         handleInput();
         timeCount1 += dt;
         timeCount2 += dt;
-        if (timeCount1 > 3){
-            int y_pos = rand.nextInt(PlaneRacing.HEIGHT - 60);
-            Enemy enemy = new Enemy(PlaneRacing.WIDTH, y_pos);
-            enemies.add(enemy);
-            timeCount1 = 0;
-            pos += 100;
+        if (timeCount1 > enemy_spawner){
+                int y_pos = rand.nextInt(PlaneRacing.HEIGHT - 60);
+                Enemy enemy = new Enemy(PlaneRacing.WIDTH, y_pos);
+                enemies.add(enemy);
+                timeCount1 = 0;
         }
 
         if (timeCount2 > 2){
@@ -249,7 +256,7 @@ public class PlayScreen extends State{
                                 hero_bullets.remove(j);
                                 enemies.get(i).getHit(20);
                                 if (enemies.get(i).getHealth() == 0) {
-                                    explosion.play(0.1f);
+                                    if (game.on) explosion.play(0.1f);
                                     hud.incScore(100);
                                     enemies.get(i).dispose();
                                     enemies.remove(i);
@@ -270,7 +277,7 @@ public class PlayScreen extends State{
         for (int j = 0; j < enemy_bullets.size(); j++){
             if (enemy_bullets.get(j).colides(hero.getBox())){
                 Gdx.app.log("Collision", "Hero");
-                getHit.play(0.1f);
+                if (game.on) getHit.play(0.1f);
                 Explosion exp = new Explosion((int) enemy_bullets.get(j).getPositionX(), (int) enemy_bullets.get(j).getPositionY(), 1);
                 explosions.add(exp);
                 enemy_bullets.get(j).dispose();
@@ -344,6 +351,5 @@ public class PlayScreen extends State{
         font.dispose();
         buttonAtlas.dispose();
         shot.dispose();
-        song.dispose();
     }
 }
