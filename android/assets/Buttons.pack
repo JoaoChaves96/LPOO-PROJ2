@@ -5,42 +5,70 @@ filter: Nearest,Nearest
 repeat: none
 playBtn
   rotate: false
-  xy: 1, 105
+  xy: 1, 103
   size: 350, 150
   orig: 350, 150
   offset: 0, 0
   index: -1
+audioOff
+  rotate: false
+  xy: 1, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+audioOn
+  rotate: false
+  xy: 353, 153
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+musicOff
+  rotate: false
+  xy: 103, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+musicOn
+  rotate: false
+  xy: 205, 1
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 arrowDown
   rotate: false
-  xy: 1, 53
+  xy: 455, 203
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 1, 1
+  xy: 353, 101
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 353, 205
+  xy: 455, 151
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 53, 53
+  xy: 307, 49
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 53, 1
+  xy: 359, 49
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
