@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
@@ -73,7 +74,12 @@ public class PlayScreen extends State{
 
     public PlayScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
-        hero = new Hero(50, PlaneRacing.HEIGHT/2);
+
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false);
+        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
+
+        hero = new Hero(50, Gdx.graphics.getHeight() / 2);
         background = new Texture("background.png");
         hero_bullets = new ArrayList<Bullet>();
         enemy_bullets = new ArrayList<Bullet>();
@@ -101,10 +107,6 @@ public class PlayScreen extends State{
         shot = Gdx.audio.newSound(Gdx.files.internal("laser.ogg"));
         getHit = Gdx.audio.newSound(Gdx.files.internal("getHit.ogg"));
         explosion = Gdx.audio.newSound((Gdx.files.internal("explosion.ogg")));
-
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false);
-        port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
         stage = new Stage(port, game.batch);
 
@@ -154,27 +156,27 @@ public class PlayScreen extends State{
         stylePause.font = font;
 
         buttonUp = new TextButton("", styleUp);
-        buttonUp.setPosition(PlaneRacing.WIDTH / 8  - 50, PlaneRacing.HEIGHT / 4 - 20);
+        buttonUp.setPosition(Gdx.graphics.getWidth() / 8  - 50, Gdx.graphics.getHeight() / 4 - 20);
         buttonUp.setBounds(buttonUp.getX(), buttonUp.getY(), 100, 100);
 
         buttonDown = new TextButton("", styleDown);
-        buttonDown.setPosition(PlaneRacing.WIDTH / 8 - 50, PlaneRacing.HEIGHT / 4 - 120);
+        buttonDown.setPosition(Gdx.graphics.getWidth() / 8 - 50, Gdx.graphics.getHeight() / 4 - 120);
         buttonDown.setBounds(buttonDown.getX(), buttonDown.getY(), 100, 100);
 
         buttonLeft = new TextButton("", styleLeft);
-        buttonLeft.setPosition(PlaneRacing.WIDTH / 8  - 120, PlaneRacing.HEIGHT / 4 - 70);
+        buttonLeft.setPosition(Gdx.graphics.getWidth() / 8  - 120, Gdx.graphics.getHeight() / 4 - 70);
         buttonLeft.setBounds(buttonLeft.getX(), buttonLeft.getY(), 100, 100);
 
         buttonRight = new TextButton("", styleRight);
-        buttonRight.setPosition(PlaneRacing.WIDTH / 8   + 20, PlaneRacing.HEIGHT / 4 - 70);
+        buttonRight.setPosition(Gdx.graphics.getWidth() / 8   + 20, Gdx.graphics.getHeight() / 4 - 70);
         buttonRight.setBounds(buttonRight.getX(), buttonRight.getY(), 100, 100);
 
         buttonShot = new TextButton("", styleShot);
-        buttonShot.setPosition(PlaneRacing.WIDTH / 2 + 100, PlaneRacing.HEIGHT / 4 - 90);
+        buttonShot.setPosition(Gdx.graphics.getWidth() / 2 + 200, Gdx.graphics.getHeight() / 4 - 90);
         buttonShot.setBounds(buttonShot.getX(), buttonShot.getY(), 150, 150);
 
         buttonPause = new TextButton("", stylePause);
-        buttonPause.setPosition(PlaneRacing.WIDTH / 2 + 270, PlaneRacing.HEIGHT - 10);
+        buttonPause.setPosition(Gdx.graphics.getWidth() / 2 + 300, Gdx.graphics.getHeight() - 50);
         buttonPause.setBounds(buttonPause.getX(), buttonPause.getY(), 50, 50);
 
         stage.addActor(buttonUp);
@@ -225,10 +227,6 @@ public class PlayScreen extends State{
            Bullet bullet = new Bullet((int) hero.getPositionX() + 30,(int) hero.getPositionY()+17, "H");
             hero_bullets.add(bullet);
            if (game.on) shot.play(0.05f);
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.E)){
-            Enemy enemy = new Enemy(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2);
-            enemies.add(enemy);
         }
     }
 

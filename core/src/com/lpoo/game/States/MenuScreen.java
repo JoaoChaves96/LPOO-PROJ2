@@ -23,6 +23,7 @@ public class MenuScreen extends State {
     private Stage stage;
     private TextButton playBtn;
     private TextButton options;
+    private TextButton highscoresBtn;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
@@ -53,24 +54,33 @@ public class MenuScreen extends State {
 
         TextButton.TextButtonStyle play = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleOptions = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle styleScore = new TextButton.TextButtonStyle();
 
         play.up = skin.getDrawable("playBtn");
         play.down = skin.getDrawable("playBtn");
         play.checked = skin.getDrawable("playBtn");
         play.font = font;
 
-        styleOptions.up = skin.getDrawable("wrench");
-        styleOptions.down = skin.getDrawable("wrench");
+        styleOptions.up = skin.getDrawable("options");
+        styleOptions.down = skin.getDrawable("options");
         styleOptions.font = font;
 
+        styleScore.up = skin.getDrawable("highscores");
+        styleScore.down = skin.getDrawable("highscores");
+        styleScore.font = font;
+
         playBtn = new TextButton("", play);
-        playBtn.setPosition(PlaneRacing.WIDTH / 10, PlaneRacing.HEIGHT / 2 + PlaneRacing.HEIGHT / 6);
+        playBtn.setPosition(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 6);
 
         options = new TextButton("", styleOptions);
-        options.setPosition(PlaneRacing.WIDTH / 4 - 200, 50);
+        options.setPosition(Gdx.graphics.getWidth() / 10 + 22, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 6 - 150);
+
+        highscoresBtn = new TextButton("", styleScore);
+        highscoresBtn.setPosition(Gdx.graphics.getWidth() / 10 + 22, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 6 - 300);
 
         stage.addActor(playBtn);
         stage.addActor(options);
+        stage.addActor(highscoresBtn);
 
         playBtn.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){

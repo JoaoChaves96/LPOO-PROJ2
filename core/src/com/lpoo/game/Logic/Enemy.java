@@ -1,5 +1,6 @@
 package com.lpoo.game.Logic;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Plane;
 import com.badlogic.gdx.math.Rectangle;
@@ -19,7 +20,7 @@ public class Enemy {
     public Enemy(int x, int y){
         position = new Vector2(x, y);
         enemy = new Texture("enemy.png");
-        box = new Rectangle(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2, enemy.getWidth(), enemy.getHeight() + 10);
+        box = new Rectangle(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, enemy.getWidth(), enemy.getHeight() + 10);
         box.setPosition(x + 23, y + 10);
         health = 100;
     }

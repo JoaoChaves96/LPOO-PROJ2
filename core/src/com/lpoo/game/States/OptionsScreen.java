@@ -78,24 +78,28 @@ public class OptionsScreen extends State {
         style3.font = font;
 
         styleexit = new TextButton.TextButtonStyle();
-        styleexit.up = skin.getDrawable("exit");
-        styleexit.down = skin.getDrawable("exit");
+        styleexit.up = skin.getDrawable("home");
+        styleexit.down = skin.getDrawable("home");
         styleexit.font = font;
 
         sound = new TextButton("", styleSound);
-        sound.setPosition(PlaneRacing.WIDTH / 9 - 100, PlaneRacing.HEIGHT / 2);
+        sound.setPosition(PlaneRacing.WIDTH / 9 - 100, PlaneRacing.HEIGHT / 2 - 50);
+        sound.setBounds(sound.getX(), sound.getY(), 150, 150);
 
         l1 = new TextButton("", style1);
-        l1.setPosition(PlaneRacing.WIDTH / 4, PlaneRacing.HEIGHT / 2);
+        l1.setPosition(PlaneRacing.WIDTH / 4 + 100, PlaneRacing.HEIGHT / 2 - 50);
+        l1.setBounds(l1.getX(), l1.getY(), 150, 150);
 
         l2 = new TextButton("", style2);
-        l2.setPosition(PlaneRacing.WIDTH / 4 + 100, PlaneRacing.HEIGHT / 2);
+        l2.setPosition(PlaneRacing.WIDTH / 4 + 250, PlaneRacing.HEIGHT / 2 - 50);
+        l2.setBounds(l2.getX(), l2.getY(), 150, 150);
 
         l3 = new TextButton("", style3);
-        l3.setPosition(PlaneRacing.WIDTH / 4 + 200, PlaneRacing.HEIGHT / 2);
+        l3.setPosition(PlaneRacing.WIDTH / 4 + 400, PlaneRacing.HEIGHT / 2 - 50);
+        l3.setBounds(l3.getX(), l3.getY(), 150, 150);
 
         exit = new TextButton("", styleexit);
-        exit.setPosition(PlaneRacing.WIDTH / 2 + 200, 50);
+        exit.setPosition(PlaneRacing.WIDTH / 2 + 400, 0);
 
 
         stage.addActor(sound);

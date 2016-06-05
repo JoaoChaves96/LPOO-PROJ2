@@ -28,7 +28,7 @@ public class Hero {
     public Hero(int x, int y){
         position = new Vector2(x, y);
         hero = new Texture("hero.png");
-        box = new Rectangle(PlaneRacing.WIDTH / 2, PlaneRacing.HEIGHT / 2, hero.getWidth(), hero.getHeight() + 10);
+        box = new Rectangle(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, hero.getWidth(), hero.getHeight() + 10);
         box.setPosition(x + 23, y + 10);
         health = 100;
     }
@@ -49,7 +49,7 @@ public class Hero {
     }
 
     public void moveUp() {
-        if (position.y + 5 <= PlaneRacing.HEIGHT - hero.getHeight() - 30) {
+        if (position.y + 5 <= Gdx.graphics.getHeight() - hero.getHeight() - 30) {
             position.add(0, 5);
             box.setPosition(position.x, position.y + 5);
         }
@@ -70,7 +70,7 @@ public class Hero {
     }
 
     public void moveRight(){
-        if(position.x + 5 <= PlaneRacing.WIDTH - hero.getWidth() - 30) {
+        if(position.x + 5 <= Gdx.graphics.getWidth() - hero.getWidth() - 30) {
             position.add(5, 0);
             box.setPosition(position.x + 23, position.y + 10);
         }

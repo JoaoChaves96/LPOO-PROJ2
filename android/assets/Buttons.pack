@@ -3,135 +3,163 @@ Buttons.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+sprites
+  rotate: false
+  xy: 1, 500
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
 playBtn
   rotate: false
-  xy: 1, 105
+  xy: 1, 348
   size: 350, 150
   orig: 350, 150
   offset: 0, 0
   index: -1
+highscores
+  rotate: false
+  xy: 643, 839
+  size: 335, 141
+  orig: 335, 141
+  offset: 0, 0
+  index: -1
+options
+  rotate: false
+  xy: 1, 205
+  size: 335, 141
+  orig: 335, 141
+  offset: 0, 0
+  index: -1
 audioOff
   rotate: false
-  xy: 1, 3
+  xy: 353, 398
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 audioOn
   rotate: false
-  xy: 353, 155
+  xy: 643, 737
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 exit
   rotate: false
-  xy: 103, 3
+  xy: 1, 103
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+home
+  rotate: false
+  xy: 455, 398
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 musicOff
   rotate: false
-  xy: 455, 155
+  xy: 643, 635
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 musicOn
   rotate: false
-  xy: 205, 3
+  xy: 745, 737
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 pause
   rotate: false
-  xy: 557, 155
+  xy: 1, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 siganl1
   rotate: false
-  xy: 659, 155
+  xy: 103, 103
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 siganl1_c
   rotate: false
-  xy: 761, 155
+  xy: 643, 533
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal2
   rotate: false
-  xy: 863, 155
+  xy: 745, 635
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal2_c
   rotate: false
-  xy: 353, 53
+  xy: 847, 737
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal3
   rotate: false
-  xy: 455, 53
+  xy: 103, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal3_c
   rotate: false
-  xy: 557, 53
+  xy: 205, 103
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 wrench
   rotate: false
-  xy: 659, 53
+  xy: 745, 533
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 arrowDown
   rotate: false
-  xy: 307, 1
+  xy: 557, 448
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 359, 1
+  xy: 847, 685
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 411, 1
+  xy: 205, 51
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 463, 1
+  xy: 847, 633
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 515, 1
+  xy: 847, 581
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
