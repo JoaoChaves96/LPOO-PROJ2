@@ -298,7 +298,7 @@ public class PlayScreen extends State{
         hud.update(dt);
 
         if (hero.getHealth() <= 0) {
-            gsm.set(new GameOverScreen(gsm, game));
+            gsm.set(new GameOverScreen(gsm, game, hud.getScore()));
             dispose();
         }
     }

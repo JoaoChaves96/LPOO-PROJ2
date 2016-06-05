@@ -66,4 +66,8 @@ public class Hud {
     public void incScore(int num){
         score+=num;
     }
+
+    public int getScore(){
+        return score;
+    }
 }
