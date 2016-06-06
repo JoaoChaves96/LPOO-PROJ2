@@ -73,114 +73,121 @@ exit
   orig: 100, 100
   offset: 0, 0
   index: -1
-home
+exitblue
   rotate: false
   xy: 103, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-musicOff
+home
   rotate: false
   xy: 205, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-musicOn
+musicOff
   rotate: false
   xy: 557, 439
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-pause
+musicOn
   rotate: false
   xy: 659, 483
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-siganl1
+pause
   rotate: false
   xy: 761, 483
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-siganl1_c
+siganl1
   rotate: false
   xy: 863, 483
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal2
+siganl1_c
   rotate: false
   xy: 353, 337
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal2_c
+signal2
   rotate: false
   xy: 455, 337
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal3
+signal2_c
   rotate: false
   xy: 557, 337
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-signal3_c
+signal3
   rotate: false
   xy: 659, 381
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-wrench
+signal3_c
   rotate: false
   xy: 761, 381
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+wrench
+  rotate: false
+  xy: 863, 381
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 arrowDown
   rotate: false
-  xy: 863, 431
+  xy: 659, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 863, 379
+  xy: 711, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 915, 431
+  xy: 763, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 915, 379
+  xy: 815, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 659, 329
+  xy: 867, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0

@@ -36,6 +36,9 @@ public class GameOverScreen extends State {
         cam.setToOrtho(false);
         port = new FitViewport(PlaneRacing.WIDTH, PlaneRacing.HEIGHT, cam);
 
+        game.scores.add(scor);
+        game.writeScores();
+
         background = new Texture("gameover.png");
         font = new BitmapFont();
         scoreInt = scor;

@@ -24,6 +24,7 @@ public class MenuScreen extends State {
     private TextButton playBtn;
     private TextButton options;
     private TextButton highscoresBtn;
+    private TextButton exitBtn;
     private BitmapFont font;
     private Skin skin;
     private TextureAtlas buttonAtlas;
@@ -59,6 +60,7 @@ public class MenuScreen extends State {
         TextButton.TextButtonStyle play = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleOptions = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle styleScore = new TextButton.TextButtonStyle();
+        TextButton.TextButtonStyle exitScore = new TextButton.TextButtonStyle();
 
         play.up = skin.getDrawable("playBtn");
         play.down = skin.getDrawable("playBtnDown");
@@ -73,6 +75,10 @@ public class MenuScreen extends State {
         styleScore.down = skin.getDrawable("highscoresDown");
         styleScore.font = font;
 
+        exitScore.up = skin.getDrawable("exitblue");
+        exitScore.down = skin.getDrawable("exitblue");
+        exitScore.font = font;
+
         playBtn = new TextButton("", play);
         playBtn.setPosition(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 6);
 
@@ -82,9 +88,15 @@ public class MenuScreen extends State {
         highscoresBtn = new TextButton("", styleScore);
         highscoresBtn.setPosition(Gdx.graphics.getWidth() / 10 + 22, Gdx.graphics.getHeight() / 2 + Gdx.graphics.getHeight() / 6 - 300);
 
+        exitBtn = new TextButton("", exitScore);
+        exitBtn.setPosition(PlaneRacing.WIDTH / 2 + 200, 0);
+
         stage.addActor(playBtn);
         stage.addActor(options);
         stage.addActor(highscoresBtn);
+        stage.addActor(exitBtn);
+
+
 
         playBtn.addListener(new InputListener(){
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
@@ -105,6 +117,16 @@ public class MenuScreen extends State {
                 count2++;
             }
         });
+
+        highscoresBtn.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                count3++;
+            }
+        });
     }
 
     @Override
@@ -119,6 +141,17 @@ public class MenuScreen extends State {
             dispose();
             count2 = 0;
             gsm.push(new OptionsScreen(gsm, game));
+        }
+
+        if (count3 > 0){
+            dispose();
+            count3 = 0;
+            gsm.push(new HighScoreScreen(gsm, game));
+        }
+
+        if (exitBtn.isPressed()){
+            dispose();
+            System.exit(0);
         }
     }
 
