@@ -20,7 +20,7 @@ public class PauseScreen extends State {
     private OrthographicCamera cam;
     private Viewport port;
 
-    protected PauseScreen(ScreenManager gsm, PlaneRacing game, PlayScreen play) {
+    public PauseScreen(ScreenManager gsm, PlaneRacing game, PlayScreen play) {
         super(gsm, game);
 
         cam = new OrthographicCamera();

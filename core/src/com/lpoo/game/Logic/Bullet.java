@@ -10,6 +10,8 @@ import com.lpoo.game.PlaneRacing;
 import com.lpoo.game.Sprites.Animation;
 import com.lpoo.game.Sprites.AnimationExpl;
 
+import java.util.Random;
+
 /**
  * Created by Joao on 13-05-2016.
  */
@@ -18,6 +20,7 @@ public class Bullet {
     private Animation bulletAnimation;
     private Rectangle bounds;
     String type;
+    Random r;
 
     public Bullet(int x, int y, String typ){
         position = new Vector2(x, y);
@@ -31,14 +34,16 @@ public class Bullet {
         bulletAnimation = new Animation(new TextureRegion(texture), 6, 0.5f);
         bounds = new Rectangle(position.x, position.y, bulletAnimation.getFrame().getRegionWidth(), bulletAnimation.getFrame().getRegionHeight());
         type = typ;
+        r = new Random();
     }
     public void handleInput(){}
 
     public void update(float dt){
         if (type == "H")
             position.add(5,0);
-        else
+        else if (type == "E")
             position.add(-5, 0);
+
         bounds.setPosition(position.x, position.y);
         bulletAnimation.update(dt);
     }

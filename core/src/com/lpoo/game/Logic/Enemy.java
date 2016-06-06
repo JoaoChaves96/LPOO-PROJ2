@@ -13,7 +13,6 @@ import com.lpoo.game.PlaneRacing;
 public class Enemy {
     private Vector2 position;
     private Texture enemy;
-    private int dificulty;
     private int health;
     private Rectangle box;
 
