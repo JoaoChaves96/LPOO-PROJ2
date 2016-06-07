@@ -26,9 +26,9 @@ public class Bullet {
         position = new Vector2(x, y);
         String s;
         if (typ == "H")
-            s = "bAnim.png";
+            s = "banim.png";
         else
-            s = "enbAnim.png";
+            s = "enbanim.png";
 
         Texture texture = new Texture(s);
         bulletAnimation = new Animation(new TextureRegion(texture), 6, 0.5f);

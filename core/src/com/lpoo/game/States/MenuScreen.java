@@ -49,7 +49,7 @@ public class MenuScreen extends State {
 
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("Buttons.pack");
+        buttonAtlas = new TextureAtlas("buttons.pack");
         skin.addRegions(buttonAtlas);
         stage.clear();
 

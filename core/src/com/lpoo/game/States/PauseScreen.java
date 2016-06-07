@@ -50,7 +50,7 @@ public class PauseScreen extends State {
 
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("Buttons.pack");
+        buttonAtlas = new TextureAtlas("buttons.pack");
         skin.addRegions(buttonAtlas);
         TextButton.TextButtonStyle resStyle = new TextButton.TextButtonStyle();
         TextButton.TextButtonStyle homeStyle = new TextButton.TextButtonStyle();

@@ -24,6 +24,7 @@ public class Hero {
     private Texture hero;
     private int health;
     private Rectangle box;
+    private boolean dead;
 
     public Hero(int x, int y, int type){
         position = new Vector2(x, y);
@@ -42,6 +43,7 @@ public class Hero {
         box = new Rectangle(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, hero.getWidth(), hero.getHeight() + 10);
         box.setPosition(x + 23, y + 10);
         health = 100;
+        dead = false;
     }
 
     public void handleInput(){
@@ -119,5 +121,11 @@ public class Hero {
         box.setWidth(0);
         box.setHeight(0);
         box = null;
+    }
+
+    public boolean isDead(){
+        if (health <= 0)
+            dead = true;
+        return dead;
     }
 }

@@ -107,7 +107,7 @@ public class PlayScreen extends State{
         rand = new Random();
 
         shot = Gdx.audio.newSound(Gdx.files.internal("laser.ogg"));
-        getHit = Gdx.audio.newSound(Gdx.files.internal("getHit.ogg"));
+        getHit = Gdx.audio.newSound(Gdx.files.internal("gethit.ogg"));
         explosion = Gdx.audio.newSound((Gdx.files.internal("explosion.ogg")));
 
         stage = new Stage(port, game.batch);
@@ -116,7 +116,7 @@ public class PlayScreen extends State{
 
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("Buttons.pack");
+        buttonAtlas = new TextureAtlas("buttons.pack");
         skin.addRegions(buttonAtlas);
 
         stage.clear();
@@ -349,7 +349,7 @@ public class PlayScreen extends State{
             dispose();
         }
 
-        if (hero.getHealth() <= 0) {
+        if (hero.isDead()) {
             gsm.set(new GameOverScreen(gsm, game, hud.getScore()));
             dispose();
         }

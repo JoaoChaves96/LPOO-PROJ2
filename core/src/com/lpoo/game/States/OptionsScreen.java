@@ -61,7 +61,7 @@ public class OptionsScreen extends State {
         Gdx.input.setInputProcessor(stage);
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("Buttons.pack");
+        buttonAtlas = new TextureAtlas("buttons.pack");
         skin.addRegions(buttonAtlas);
         stage.clear();
 

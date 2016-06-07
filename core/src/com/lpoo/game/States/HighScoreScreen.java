@@ -49,7 +49,7 @@ public class HighScoreScreen extends State {
 
         font = new BitmapFont();
         skin = new Skin();
-        buttonAtlas = new TextureAtlas("Buttons.pack");
+        buttonAtlas = new TextureAtlas("buttons.pack");
         skin.addRegions(buttonAtlas);
         TextButton.TextButtonStyle homeStyle = new TextButton.TextButtonStyle();
 
@@ -61,7 +61,7 @@ public class HighScoreScreen extends State {
         home = new TextButton("", homeStyle);
         home.setPosition(PlaneRacing.WIDTH / 2 + 200, 0);
 
-        leaderBoard = new Texture("leaderboardsComplex.png");
+        leaderBoard = new Texture("leaderboardscomplex.png");
         first = new Texture("trophy.png");
         second = new Texture("medal2.png");
         third = new Texture("medal1.png");
