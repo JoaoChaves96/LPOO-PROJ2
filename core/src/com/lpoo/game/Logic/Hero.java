@@ -26,6 +26,12 @@ public class Hero {
     private Rectangle box;
     private boolean dead;
 
+    /**
+     * Constructor of the Hero
+     * @param x Position in x of the hero
+     * @param y Position in y of the hero
+     * @param type type of hero
+     */
     public Hero(int x, int y, int type){
         position = new Vector2(x, y);
         String s = "";
@@ -46,6 +52,9 @@ public class Hero {
         dead = false;
     }
 
+    /**
+     Input handled
+     */
     public void handleInput(){
        if(Gdx.input.isKeyPressed(Input.Keys.W)){
            moveUp();
@@ -61,6 +70,9 @@ public class Hero {
        }
     }
 
+    /**
+     * Moves the hero up
+     */
     public void moveUp() {
         if (position.y + 5 <= Gdx.graphics.getHeight() - hero.getHeight() - 30) {
             position.add(0, 5);
@@ -68,6 +80,9 @@ public class Hero {
         }
     }
 
+    /**
+     * Moves the hero down
+     */
     public void moveDown(){
         if (position.y >= 0) {
             position.add(0, -5);
@@ -75,6 +90,9 @@ public class Hero {
         }
     }
 
+    /**
+     * Moves the hero left
+     */
     public void moveLeft(){
         if (position.x >= 0) {
             position.add(-5, 0);
@@ -82,6 +100,9 @@ public class Hero {
         }
     }
 
+    /**
+     * Moves the hero right
+     */
     public void moveRight(){
         if(position.x + 5 <= Gdx.graphics.getWidth() - hero.getWidth() - 30) {
             position.add(5, 0);
@@ -89,33 +110,65 @@ public class Hero {
         }
     }
 
+    /**
+     * Update the handle input
+     * @param dt delta time
+     */
     public void update(float dt){
         handleInput();
     }
 
+    /**
+     * Get of the texture of the hero
+     * @return hero texture
+     */
     public Texture getTexture(){
         return hero;
     }
 
+    /**
+     * Get of the Position in X of the hero
+     * @return position in x
+     */
     public float getPositionX(){
         return position.x;
     }
+
+    /**
+    * Get of the Position in y of the hero
+    * @return position in y
+    */
     public float getPositionY(){
         return position.y;
     }
 
+    /**
+     * Get of the rectangle
+     * @return box of the hero
+     */
     public Rectangle getBox(){
         return box;
     }
 
+    /**
+     * Reduces the health of the hero when it is hitted
+     * @param hp health lost
+     */
     public void getHit(int hp){
         health -= hp;
     }
 
+    /**
+     * Get of the health of the hero
+     * @return health of the hero
+     */
     public int getHealth(){
         return health;
     }
 
+    /**
+     * Disposes the hero
+     */
     public void dispose(){
         hero.dispose();
         box.setWidth(0);
@@ -123,6 +176,10 @@ public class Hero {
         box = null;
     }
 
+    /**
+     * Boolean to check if the hero is dead
+     * @return true if is dead, false if it is not
+     */
     public boolean isDead(){
         if (health <= 0)
             dead = true;

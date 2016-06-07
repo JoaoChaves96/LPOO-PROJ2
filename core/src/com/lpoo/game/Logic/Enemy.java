@@ -16,6 +16,11 @@ public class Enemy {
     private int health;
     private Rectangle box;
 
+    /**
+     Constructor of the enemy
+     * @param x Position in X of the enemy
+     * @param y Position in Y of the enemy
+     */
     public Enemy(int x, int y){
         position = new Vector2(x, y);
         enemy = new Texture("enemy.png");
@@ -24,33 +29,63 @@ public class Enemy {
         health = 100;
     }
 
+    /**
+     Input handled
+     */
     public void handleInput(){}
 
+    /**
+     Update of the enemy position
+     @param dt distance to be moved
+     */
     public void update(float dt){
         position.add(-2, 0);
         box.setPosition(position.x + 23, position.y + 10);
     }
 
+    /**
+     Get of the Texture
+     @return texture of the enemy
+     */
     public Texture getTexture(){
         return enemy;
     }
 
+    /**
+     Get of the Position X
+     @return position x of the enemy
+     */
     public float getPositionX(){
         return position.x;
     }
 
+    /**
+     Get of the Position y
+     @return position y of the enemy
+     */
     public float getPositionY(){
         return position.y;
     }
 
+    /**
+     Get of the box of the enemy
+     @return box of the enemy
+     */
     public Rectangle getBox(){
         return box;
     }
 
+    /**
+     Function when the enemy is hitted, reducing his health
+     @param dmg Size of health that enemy loses
+     */
     public void getHit(int dmg){
         health-=dmg;
     }
 
+    /**
+     This function dispose the enemy
+     */
     public void dispose(){
         enemy.dispose();
         box.setWidth(0);
@@ -58,6 +93,10 @@ public class Enemy {
         box = null;
     }
 
+    /**
+     Get of the actual health of the enenmy
+     @return health of the enemy
+     */
     public int getHealth(){
         return health;
     }
