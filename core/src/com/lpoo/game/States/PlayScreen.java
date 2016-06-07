@@ -344,10 +344,7 @@ public class PlayScreen extends State{
 
         hud.update(dt);
 
-        if (collision()) {
-            gsm.set(new GameOverScreen(gsm, game, hud.getScore()));
-            dispose();
-        }
+        hero.checkCollisions(enemies);
 
         if (hero.isDead()) {
             gsm.set(new GameOverScreen(gsm, game, hud.getScore()));
@@ -399,18 +396,5 @@ public class PlayScreen extends State{
         font.dispose();
         buttonAtlas.dispose();
         shot.dispose();
-    }
-
-    public boolean collision() {
-
-        boolean tmp = false;
-        for(Enemy en : enemies)
-        {
-            if (en.getBox().overlaps(hero.getBox()))
-            {
-                tmp = true;
-            }
-        }
-        return tmp;
     }
 }

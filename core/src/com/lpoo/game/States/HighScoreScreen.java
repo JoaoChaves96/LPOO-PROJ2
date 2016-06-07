@@ -111,10 +111,10 @@ public class HighScoreScreen extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sb.draw(leaderBoard, PlaneRacing.WIDTH/4, PlaneRacing.HEIGHT-100, leaderBoard.getWidth()*3, leaderBoard.getHeight()*2);
-        sb.draw(first, PlaneRacing.WIDTH/2- 30, PlaneRacing.HEIGHT/2 + 55);
-        sb.draw(second,PlaneRacing.WIDTH/2- 30, PlaneRacing.HEIGHT/2 - 45);
-        sb.draw(third,PlaneRacing.WIDTH/2- 30, PlaneRacing.HEIGHT/2 - 145);
+        sb.draw(leaderBoard, PlaneRacing.WIDTH/4 + 30, PlaneRacing.HEIGHT-160, leaderBoard.getWidth()*3, leaderBoard.getHeight()*2);
+        sb.draw(first, PlaneRacing.WIDTH/2, PlaneRacing.HEIGHT/2 + 25);
+        sb.draw(second,PlaneRacing.WIDTH/2, PlaneRacing.HEIGHT/2 - 75);
+        sb.draw(third,PlaneRacing.WIDTH/2, PlaneRacing.HEIGHT/2 - 175);
         sb.end();
         stage.draw();
     }

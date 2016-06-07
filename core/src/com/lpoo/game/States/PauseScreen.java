@@ -64,10 +64,10 @@ public class PauseScreen extends State {
         homeStyle.font = font;
 
         resume = new TextButton("", resStyle);
-        resume.setPosition(PlaneRacing.WIDTH / 6 - 100, PlaneRacing.HEIGHT / 2 - 50);
+        resume.setPosition(PlaneRacing.WIDTH / 6 - 70, PlaneRacing.HEIGHT / 2 - 50);
 
         home = new TextButton("", homeStyle);
-        home.setPosition(PlaneRacing.WIDTH/4 + 300, PlaneRacing.HEIGHT / 2 - 20);
+        home.setPosition(PlaneRacing.WIDTH/4 + 330, PlaneRacing.HEIGHT / 2 - 20);
 
 
         stage.addActor(resume);

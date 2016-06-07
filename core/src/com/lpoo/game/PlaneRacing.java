@@ -20,8 +20,8 @@ import java.util.Collections;
 import sun.rmi.runtime.Log;
 
 public class PlaneRacing extends Game {
-	public static final int WIDTH = 1100;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 897;
+	public static final int HEIGHT = 540;
 
 	public static final String TITLE = "PlaneRacing";
 
