@@ -30,6 +30,7 @@ public class PlaneRacing extends Game {
 	public Music song;
 	public boolean on;
 	public int dif;
+	public int hero;
 	public ArrayList<Integer> scores;
 
 	private Preferences scoresPref;
@@ -57,6 +58,7 @@ public class PlaneRacing extends Game {
 
 		on = true;
 		dif = 1;
+		hero = 1;
 
 		song = Gdx.audio.newMusic((Gdx.files.internal("unity.mp3")));
 

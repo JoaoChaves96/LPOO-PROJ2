@@ -31,12 +31,16 @@ public class HighScoreScreen extends State {
     private TextureAtlas buttonAtlas;
     private TextButton home;
 
-    private  Label score1Label;
+    private Texture background;
+
+    private Label score1Label;
     private Label score2Label;
     private Label score3Label;
 
     public HighScoreScreen(ScreenManager gsm, PlaneRacing game) {
         super(gsm, game);
+
+        background = new Texture("options_background.png");
 
         stage = new Stage();
 
@@ -106,6 +110,7 @@ public class HighScoreScreen extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
+        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(leaderBoard, PlaneRacing.WIDTH/4, PlaneRacing.HEIGHT-100, leaderBoard.getWidth()*3, leaderBoard.getHeight()*2);
         sb.draw(first, PlaneRacing.WIDTH/2- 30, PlaneRacing.HEIGHT/2 + 55);
         sb.draw(second,PlaneRacing.WIDTH/2- 30, PlaneRacing.HEIGHT/2 - 45);

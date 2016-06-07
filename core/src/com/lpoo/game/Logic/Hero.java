@@ -25,9 +25,20 @@ public class Hero {
     private int health;
     private Rectangle box;
 
-    public Hero(int x, int y){
+    public Hero(int x, int y, int type){
         position = new Vector2(x, y);
-        hero = new Texture("hero.png");
+        String s = "";
+        switch(type){
+            case 1:
+                s= "hero.png";
+                break;
+            case 2:
+                s = "heroorange.png";
+                break;
+            case 3:
+                s = "herogreen.png";
+        }
+        hero = new Texture(s);
         box = new Rectangle(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, hero.getWidth(), hero.getHeight() + 10);
         box.setPosition(x + 23, y + 10);
         health = 100;

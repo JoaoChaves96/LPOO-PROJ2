@@ -50,6 +50,7 @@ public class PlayScreen extends State{
     private Array<Explosion> explosions;
     private ArrayList<Enemy> enemies;
     private int count;
+    private int count2;
     private float timeCount1;
     private float timeCount2;
     private int enemy_spawner;
@@ -79,7 +80,7 @@ public class PlayScreen extends State{
         cam.setToOrtho(false);
         port = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), cam);
 
-        hero = new Hero(50, Gdx.graphics.getHeight() / 2);
+        hero = new Hero(50, Gdx.graphics.getHeight() / 2, game.hero);
         background = new Texture("background.png");
         hero_bullets = new ArrayList<Bullet>();
         enemy_bullets = new ArrayList<Bullet>();
@@ -87,6 +88,7 @@ public class PlayScreen extends State{
         explosions = new Array<Explosion>();
         enemies = new ArrayList<Enemy>();
         count = 0;
+        count2 = 0;
         timeCount1 = 0;
         timeCount2 = 0;
 
@@ -176,7 +178,7 @@ public class PlayScreen extends State{
         buttonShot.setBounds(buttonShot.getX(), buttonShot.getY(), 150, 150);
 
         buttonPause = new TextButton("", stylePause);
-        buttonPause.setPosition(Gdx.graphics.getWidth() / 2 + 300, Gdx.graphics.getHeight() - 50);
+        buttonPause.setPosition(Gdx.graphics.getWidth() / 2 + 350, Gdx.graphics.getHeight() - 50);
         buttonPause.setBounds(buttonPause.getX(), buttonPause.getY(), 50, 50);
 
         stage.addActor(buttonUp);
@@ -193,6 +195,16 @@ public class PlayScreen extends State{
 
             public void touchUp(InputEvent event, float x, float y, int pointer, int button){
                 count++;
+            }
+        });
+
+        buttonPause.addListener(new InputListener(){
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button){
+                return true;
+            }
+
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button){
+                count2++;
             }
         });
     }
@@ -212,8 +224,11 @@ public class PlayScreen extends State{
         if (buttonRight.isPressed())
             hero.moveRight();
 
-        if (buttonPause.isPressed())
+        if (count2 > 0) {
+            count2 = 0;
             gsm.set(new PauseScreen(gsm, game, this));
+
+        }
 
         if (count != 0) {
             Bullet bullet = new Bullet((int) hero.getPositionX() + 30, (int) hero.getPositionY() + 17, "H");

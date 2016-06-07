@@ -52,143 +52,206 @@ optionsDown
   orig: 335, 141
   offset: 0, 0
   index: -1
-audioOff
+resume
   rotate: false
-  xy: 353, 439
-  size: 100, 100
-  orig: 100, 100
+  xy: 353, 398
+  size: 335, 141
+  orig: 335, 141
   offset: 0, 0
   index: -1
-audioOn
+audioOff
   rotate: false
   xy: 1, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-exit
-  rotate: false
-  xy: 455, 439
-  size: 100, 100
-  orig: 100, 100
-  offset: 0, 0
-  index: -1
-exitblue
+audioOn
   rotate: false
   xy: 103, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
-home
+exit
   rotate: false
   xy: 205, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
+exitblue
+  rotate: false
+  xy: 690, 483
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+home
+  rotate: false
+  xy: 792, 483
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+homeblue
+  rotate: false
+  xy: 894, 483
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
 musicOff
   rotate: false
-  xy: 557, 439
+  xy: 690, 381
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 musicOn
   rotate: false
-  xy: 659, 483
+  xy: 792, 381
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 pause
   rotate: false
-  xy: 761, 483
+  xy: 894, 381
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+right
+  rotate: false
+  xy: 307, 1
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 siganl1
   rotate: false
-  xy: 863, 483
+  xy: 338, 287
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 siganl1_c
   rotate: false
-  xy: 353, 337
+  xy: 338, 185
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal2
   rotate: false
-  xy: 455, 337
+  xy: 440, 296
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal2_c
   rotate: false
-  xy: 557, 337
+  xy: 440, 194
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal3
   rotate: false
-  xy: 659, 381
+  xy: 542, 296
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 signal3_c
   rotate: false
-  xy: 761, 381
+  xy: 542, 194
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 wrench
   rotate: false
-  xy: 863, 381
+  xy: 644, 279
   size: 100, 100
   orig: 100, 100
   offset: 0, 0
   index: -1
 arrowDown
   rotate: false
-  xy: 659, 329
+  xy: 338, 133
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowLeft
   rotate: false
-  xy: 711, 329
+  xy: 644, 227
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowRight
   rotate: false
-  xy: 763, 329
+  xy: 746, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 arrowUp
   rotate: false
-  xy: 815, 329
+  xy: 798, 329
   size: 50, 50
   orig: 50, 50
   offset: 0, 0
   index: -1
 buttonA
   rotate: false
-  xy: 867, 329
+  xy: 850, 329
   size: 50, 50
   orig: 50, 50
+  offset: 0, 0
+  index: -1
+heroB
+  rotate: false
+  xy: 643, 554
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+heroBS
+  rotate: false
+  xy: 995, 992
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+heroG
+  rotate: false
+  xy: 390, 154
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+heroGS
+  rotate: false
+  xy: 644, 196
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+heroO
+  rotate: false
+  xy: 696, 248
+  size: 23, 29
+  orig: 23, 29
+  offset: 0, 0
+  index: -1
+heroOS
+  rotate: false
+  xy: 746, 298
+  size: 23, 29
+  orig: 23, 29
   offset: 0, 0
   index: -1
