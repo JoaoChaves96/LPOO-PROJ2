@@ -47,7 +47,7 @@ public class PlayScreen extends State{
     private Hud hud;
     private ArrayList<Bullet> hero_bullets;
     private ArrayList<Bullet> enemy_bullets;
-    private Array<Explosion> explosions;
+    private ArrayList<Explosion> explosions;
     private ArrayList<Enemy> enemies;
     private int count;
     private int count2;
@@ -85,7 +85,7 @@ public class PlayScreen extends State{
         hero_bullets = new ArrayList<Bullet>();
         enemy_bullets = new ArrayList<Bullet>();
         hud = new Hud (game.batch, hero);
-        explosions = new Array<Explosion>();
+        explosions = new ArrayList<Explosion>();
         enemies = new ArrayList<Enemy>();
         count = 0;
         count2 = 0;
@@ -306,7 +306,7 @@ public class PlayScreen extends State{
 
         for (int j = 0; j < enemy_bullets.size(); j++){
             if (enemy_bullets.get(j).colides(hero.getBox())){
-                Gdx.app.log("Collision", "Hero");
+                Gdx.app.log("Collision","Hero");
                 if (game.on) getHit.play(0.1f);
                 Gdx.input.vibrate(50);
                 Explosion exp = new Explosion((int) enemy_bullets.get(j).getPositionX(), (int) enemy_bullets.get(j).getPositionY(), 1);
@@ -322,12 +322,14 @@ public class PlayScreen extends State{
             bullet.update(dt);
         for (Bullet bullet : enemy_bullets)
             bullet.update(dt);
-        for (Explosion exp : explosions)
-            exp.update(dt);
 
-        for (int i = 0; i<explosions.size; i++){
-            if (explosions.get(i).getFrame()>=10)
-                explosions.removeIndex(i);
+        for (int i = 0; i<explosions.size(); i++){
+            if (explosions.get(i).isDead()) {
+                explosions.get(i).dispose();
+                explosions.remove(i);
+            }
+            else
+                explosions.get(i).update(dt);
         }
 
         for (int i = 0; i < enemies.size(); i++){
@@ -351,8 +353,6 @@ public class PlayScreen extends State{
             gsm.set(new GameOverScreen(gsm, game, hud.getScore()));
             dispose();
         }
-
-
     }
 
     @Override

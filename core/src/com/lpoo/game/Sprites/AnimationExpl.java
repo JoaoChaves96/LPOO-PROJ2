@@ -13,6 +13,7 @@ public class AnimationExpl {
     float currentFrameTime;
     int frameCount;
     int frame;
+    private boolean dead;
 
 
     public AnimationExpl(TextureRegion region, int frameCount, float cycleTime, int size){
@@ -26,6 +27,7 @@ public class AnimationExpl {
         this.frameCount = frameCount;
         maxFrameTime = cycleTime / frameCount;
         frame = 0;
+        dead = false;
     }
 
     public void update(float dt) {
@@ -35,9 +37,10 @@ public class AnimationExpl {
                 currentFrameTime = 0;
             }
         }
-        else
-            dispose();
-
+        else {
+            dead = true;
+            //dispose();
+        }
         frame++;
     }
 
@@ -59,5 +62,9 @@ public class AnimationExpl {
 
     public int getCurrFrame(){
         return frame;
+    }
+
+    public boolean isDead(){
+        return dead;
     }
 }

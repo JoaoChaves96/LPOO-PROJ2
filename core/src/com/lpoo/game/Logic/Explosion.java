@@ -63,4 +63,8 @@ public class Explosion {
     public int getSize(){
         return size;
     }
+
+    public boolean isDead(){
+        return explAnimation.isDead();
+    }
 }
