@@ -22,6 +22,12 @@ public class Bullet {
     String type;
     Random r;
 
+    /*
+    Constructor of the Bullet
+    @param x Coordenate x of the object
+    @param y Coordenate y of the object
+    @param typ Type of bullet
+     */
     public Bullet(int x, int y, String typ){
         position = new Vector2(x, y);
         String s;
@@ -36,8 +42,16 @@ public class Bullet {
         type = typ;
         r = new Random();
     }
+
+    /**
+     Input handled
+     */
     public void handleInput(){}
 
+    /**
+     Update of the bullet position
+     @param dt distance to be moved
+     */
     public void update(float dt){
         if (type == "H")
             position.add(5,0);
@@ -48,26 +62,50 @@ public class Bullet {
         bulletAnimation.update(dt);
     }
 
+    /**
+     Get of the Texture
+     @return texture of the bullet
+     */
     public TextureRegion getTexture()
     {
        return bulletAnimation.getFrame();
     }
 
+    /**
+     Get of the Position X
+     @return position x of the bullet
+     */
     public float getPositionX(){
         return position.x;
     }
+    /**
+     Get of the Position y
+     @return position y of the bullet
+     */
     public float getPositionY(){
         return position.y;
     }
 
+    /**
+     Boolean function to check if the bullet has colided with another object
+     * @param player rectangle to check if colided
+     * @return true if colides, false if not
+     */
     public boolean colides(Rectangle player){
         return player.overlaps(bounds);
     }
 
+    /**
+     Get of the bounds of the bullet
+     @return bounds of the bullet
+     */
     public Rectangle getRectangle(){
         return bounds;
     }
 
+    /**
+     This function dispose the bullet
+     */
     public void dispose(){
         bounds.setWidth(0);
         bounds.setHeight(0);
