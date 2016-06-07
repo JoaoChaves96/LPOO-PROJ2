@@ -20,7 +20,6 @@ public class Bullet {
     private Animation bulletAnimation;
     private Rectangle bounds;
     String type;
-    Random r;
 
     /*
     Constructor of the Bullet
@@ -40,13 +39,7 @@ public class Bullet {
         bulletAnimation = new Animation(new TextureRegion(texture), 6, 0.5f);
         bounds = new Rectangle(position.x, position.y, bulletAnimation.getFrame().getRegionWidth(), bulletAnimation.getFrame().getRegionHeight());
         type = typ;
-        r = new Random();
     }
-
-    /**
-     Input handled
-     */
-    public void handleInput(){}
 
     /**
      Update of the bullet position
@@ -99,7 +92,7 @@ public class Bullet {
      Get of the bounds of the bullet
      @return bounds of the bullet
      */
-    public Rectangle getRectangle(){
+    public Rectangle getBounds(){
         return bounds;
     }
 

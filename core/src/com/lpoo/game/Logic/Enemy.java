@@ -30,11 +30,6 @@ public class Enemy {
     }
 
     /**
-     Input handled
-     */
-    public void handleInput(){}
-
-    /**
      Update of the enemy position
      @param dt distance to be moved
      */

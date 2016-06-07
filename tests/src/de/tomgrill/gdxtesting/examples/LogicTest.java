@@ -18,7 +18,9 @@ package de.tomgrill.gdxtesting.examples;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.lpoo.game.Logic.Bullet;
 import com.lpoo.game.Logic.Enemy;
+import com.lpoo.game.Logic.Explosion;
 import com.lpoo.game.Logic.Hero;
 
 import org.junit.Test;
@@ -90,6 +92,79 @@ public class LogicTest {
 	@Test
 	public void testHeroDisposed(){
 		Hero hero = new Hero(50, 50, 1);
+		hero.dispose();
+		assertEquals(null, hero.getBox());
 	}
+
+	@Test
+	public void testEnemyMove(){
+		Enemy en = new Enemy(50, 50);
+		en.update(0.1f);
+		assertEquals(48, (int)en.getPositionX());
+		assertEquals(50, (int)en.getPositionY());
+	}
+
+	@Test
+	public void testEnemyGetHit(){
+		Enemy en = new Enemy(50, 50);
+		en.getHit(30);
+		assertEquals(70, en.getHealth());
+	}
+
+	@Test
+	public void testEnemyDisposed(){
+		Enemy en = new Enemy(50, 50);
+		en.dispose();
+		assertEquals(null, en.getBox());
+	}
+
+	@Test
+	public void testBulletType(){
+		Bullet b1 = new Bullet(50, 50, "H");
+		Bullet b2 = new Bullet(50, 50, "E");
+
+		b1.update(0.1f);
+		b2.update(0.2f);
+
+		assertEquals(50, (int)b1.getPositionY());
+		assertEquals(50, (int)b2.getPositionY());
+		assertEquals(55, (int)b1.getPositionX());
+		assertEquals(45, (int)b2.getPositionX());
+	}
+
+	@Test
+	public void testBulletCollision(){
+		Hero hero = new Hero(50, 50, 1);
+		Bullet b1 = new Bullet(50, 50, "E");
+
+		assertTrue(b1.colides(hero.getBox()));
+	}
+
+	@Test
+	public void testBulletDisposed(){
+		Bullet b1 = new Bullet(50, 50, "H");
+		b1.dispose();
+		assertEquals(null, b1.getBounds());
+	}
+
+	@Test
+	public void testExplosionPosition(){
+		Explosion exp = new Explosion(50, 50, 1);
+
+		assertEquals(50, (int)exp.getPositionX());
+		assertEquals(50, (int)exp.getPositionY());
+	}
+
+	@Test
+	public void testExplosionUpdateandDispose(){
+		Explosion exp = new Explosion(50, 50, 1);
+
+		for (int i = 0; i<10; i++){
+			exp.update(0.1f);
+		}
+
+		assertEquals(6, exp.getFrame());
+	}
+
 
 }

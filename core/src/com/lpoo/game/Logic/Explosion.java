@@ -31,11 +31,6 @@ public class Explosion {
     }
 
     /**
-     Input handled
-     */
-    public void handleInput(){}
-
-    /**
      Update of the explosion position
      @param dt distance to be moved
      */
@@ -61,29 +56,13 @@ public class Explosion {
     public float getPositionX(){
         return position.x;
     }
+
     /**
      Get of the Position y
      @return position y of the explosion
      */
     public float getPositionY(){
         return position.y;
-    }
-
-    /**
-     Boolean function to check if the enemy has colided with another object
-     * @param player rectangle to check if colided
-     * @return true if colides, false if not
-     */
-    public boolean colides(Rectangle player){
-        return player.overlaps(bounds);
-    }
-
-    /**
-     Get of the bounds of the enemy
-     @return bounds of the enemy
-     */
-    public Rectangle getRectangle(){
-        return bounds;
     }
 
     /**
