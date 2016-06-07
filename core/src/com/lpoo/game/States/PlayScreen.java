@@ -284,8 +284,8 @@ public class PlayScreen extends State{
                                 explosions.add(exp);
                                 hero_bullets.get(j).dispose();
                                 hero_bullets.remove(j);
-                                enemies.get(i).getHit(20);
-                                if (enemies.get(i).getHealth() == 0) {
+                                enemies.get(i).getHit(40);
+                                if (enemies.get(i).getHealth() <= 0) {
                                     if (game.on) explosion.play(0.1f);
                                     hud.incScore(100);
                                     enemies.get(i).dispose();
@@ -308,6 +308,7 @@ public class PlayScreen extends State{
             if (enemy_bullets.get(j).colides(hero.getBox())){
                 Gdx.app.log("Collision", "Hero");
                 if (game.on) getHit.play(0.1f);
+                Gdx.input.vibrate(50);
                 Explosion exp = new Explosion((int) enemy_bullets.get(j).getPositionX(), (int) enemy_bullets.get(j).getPositionY(), 1);
                 explosions.add(exp);
                 enemy_bullets.get(j).dispose();
@@ -323,8 +324,15 @@ public class PlayScreen extends State{
             bullet.update(dt);
         for (Explosion exp : explosions)
             exp.update(dt);
+
+        for (int i = 0; i<explosions.size; i++){
+            if (explosions.get(i).getFrame()>=10)
+                explosions.removeIndex(i);
+        }
+
         for (int i = 0; i < enemies.size(); i++){
            if (enemies.get(i).getPositionX() < 0) {
+               Gdx.input.vibrate(50);
                hero.getHit(10);
                enemies.remove(i);
            }
@@ -352,7 +360,10 @@ public class PlayScreen extends State{
         sb.begin();
         sb.draw(background, 0, 0,  Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
             for (Explosion exp : explosions) {
-                sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY());
+                if (exp.getSize() == 3)
+                    sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY(), hero.getTexture().getWidth(), hero.getTexture().getHeight());
+                else
+                    sb.draw(exp.getTexture(), exp.getPositionX(), exp.getPositionY());
             }
             for(Enemy en : enemies){
                 sb.draw(en.getTexture(), en.getPositionX(), en.getPositionY(),  en.getTexture().getWidth() * 2, en.getTexture().getHeight() * 2);

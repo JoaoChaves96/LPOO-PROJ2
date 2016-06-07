@@ -14,11 +14,13 @@ public class Explosion {
     private Vector2 position;
     private AnimationExpl explAnimation;
     private Rectangle bounds;
+    private int size;
 
     public Explosion(int x, int y, int size){
         position = new Vector2(x, y);
-        Texture texture = new Texture("explosionAnim2.png");
-        explAnimation = new AnimationExpl(new TextureRegion(texture), 10, 0.5f, size);
+        Texture texture = new Texture("explosionAnim3.png");
+        this.size = size;
+        explAnimation = new AnimationExpl(new TextureRegion(texture), 7, 0.7f, size);
         bounds = new Rectangle(position.x, position.y, explAnimation.getFrame().getRegionWidth(), explAnimation.getFrame().getRegionHeight());
     }
     public void handleInput(){}
@@ -52,5 +54,13 @@ public class Explosion {
     public void dispose(){
 
        explAnimation.dispose();
+    }
+
+    public int getFrame(){
+        return explAnimation.getCurrFrame();
+    }
+
+    public int getSize(){
+        return size;
     }
 }

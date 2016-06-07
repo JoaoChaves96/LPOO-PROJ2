@@ -30,14 +30,15 @@ public class AnimationExpl {
 
     public void update(float dt) {
         currentFrameTime += dt;
-        if (frame < 10) {
+        if (frame < frameCount) {
             if (currentFrameTime > maxFrameTime) {
-                frame++;
                 currentFrameTime = 0;
             }
         }
         else
             dispose();
+
+        frame++;
     }
 
     public TextureRegion getFrame() {
@@ -50,11 +51,6 @@ public class AnimationExpl {
     public void dispose(){
         for(TextureRegion frame : frames)
             frame.getTexture().dispose();
-    }
-
-    public void render(SpriteBatch sb){
-        sb.begin();
-        sb.draw(frames.get(0), 300, 300);
     }
 
     public int getFrameCount(){
